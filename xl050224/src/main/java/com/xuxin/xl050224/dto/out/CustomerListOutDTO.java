@@ -1,6 +1,6 @@
 package com.xuxin.xl050224.dto.out;
 
-public class CustomerSearchOutDTO {
+public class CustomerListOutDTO {
 
     private Integer customerId;
 
@@ -8,17 +8,13 @@ public class CustomerSearchOutDTO {
 
     private String mobile;
 
-    private String mobileVerified;
-
     private String email;
-
-    private String emailVerified;
 
     private String realName;
 
-    private Integer defaultAddressId;
+    private Long createTimestamp;
 
-    private byte newsSubscribed;
+    private byte status;
 
     public Integer getCustomerId() {
         return customerId;
@@ -44,28 +40,12 @@ public class CustomerSearchOutDTO {
         this.mobile = mobile;
     }
 
-    public String getMobileVerified() {
-        return mobileVerified;
-    }
-
-    public void setMobileVerified(String mobileVerified) {
-        this.mobileVerified = mobileVerified;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getEmailVerified() {
-        return emailVerified;
-    }
-
-    public void setEmailVerified(String emailVerified) {
-        this.emailVerified = emailVerified;
     }
 
     public String getRealName() {
@@ -76,19 +56,19 @@ public class CustomerSearchOutDTO {
         this.realName = realName;
     }
 
-    public Integer getDefaultAddressId() {
-        return defaultAddressId;
+    public Long getCreateTimestamp() {
+        return createTimestamp;
     }
 
-    public void setDefaultAddressId(Integer defaultAddressId) {
-        this.defaultAddressId = defaultAddressId;
+    public void setCreateTimestamp(Long createTimestamp) {
+        this.createTimestamp = createTimestamp;
     }
 
-    public byte getNewsSubscribed() {
-        return newsSubscribed;
+    public byte getStatus() {
+        return status;
     }
 
-    public void setNewsSubscribed(byte newsSubscribed) {
-        this.newsSubscribed = newsSubscribed;
+    public void setStatus(byte status) {
+        this.status = status;
     }
 }
