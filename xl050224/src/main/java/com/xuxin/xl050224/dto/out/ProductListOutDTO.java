@@ -1,31 +1,30 @@
-package com.xuxin.xl050224.dto.in;
+package com.xuxin.xl050224.dto.out;
 
-import java.util.List;
+public class ProductListOutDTO {
 
-public class ProductCreateInDTO {
+    private Integer productId;
 
     private String productName;
 
     private double price;
 
-    private String rewordPoints;
-
     private String productCode;
 
-    private String minaPicUrl;
-
     private double discount;
-
-    private String sortOrder;
 
     private Integer stockQuantity;
 
     private byte status;
 
-    private String description;
+    private String mainPicUrl;
 
-    private List<String> otherPicUrls;
+    public Integer getProductId() {
+        return productId;
+    }
 
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
     public String getProductName() {
         return productName;
@@ -43,14 +42,6 @@ public class ProductCreateInDTO {
         this.price = price;
     }
 
-    public String getRewordPoints() {
-        return rewordPoints;
-    }
-
-    public void setRewordPoints(String rewordPoints) {
-        this.rewordPoints = rewordPoints;
-    }
-
     public String getProductCode() {
         return productCode;
     }
@@ -59,28 +50,12 @@ public class ProductCreateInDTO {
         this.productCode = productCode;
     }
 
-    public String getMinaPicUrl() {
-        return minaPicUrl;
-    }
-
-    public void setMinaPicUrl(String minaPicUrl) {
-        this.minaPicUrl = minaPicUrl;
-    }
-
     public double getDiscount() {
         return discount;
     }
 
     public void setDiscount(double discount) {
         this.discount = discount;
-    }
-
-    public String getSortOrder() {
-        return sortOrder;
-    }
-
-    public void setSortOrder(String sortOrder) {
-        this.sortOrder = sortOrder;
     }
 
     public Integer getStockQuantity() {
@@ -99,19 +74,11 @@ public class ProductCreateInDTO {
         this.status = status;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMainPicUrl() {
+        return mainPicUrl;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<String> getOtherPicUrls() {
-        return otherPicUrls;
-    }
-
-    public void setOtherPicUrls(List<String> otherPicUrls) {
-        this.otherPicUrls = otherPicUrls;
+    public void setMainPicUrl(String mainPicUrl) {
+        this.mainPicUrl = mainPicUrl;
     }
 }

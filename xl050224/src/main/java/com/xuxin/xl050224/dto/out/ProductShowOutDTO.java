@@ -1,8 +1,10 @@
-package com.xuxin.xl050224.dto.in;
+package com.xuxin.xl050224.dto.out;
 
 import java.util.List;
 
-public class ProductCreateInDTO {
+public class ProductShowOutDTO {
+
+    private Integer productId;
 
     private String productName;
 
@@ -26,6 +28,13 @@ public class ProductCreateInDTO {
 
     private List<String> otherPicUrls;
 
+    public Integer getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Integer productId) {
+        this.productId = productId;
+    }
 
     public String getProductName() {
         return productName;

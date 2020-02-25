@@ -1,5 +1,7 @@
 package com.xuxin.xl050224.dto.in;
 
+import java.util.List;
+
 public class ProductUpdateInDTO {
 
     private Integer productId;
@@ -8,11 +10,11 @@ public class ProductUpdateInDTO {
 
     private double price;
 
-    private String productAbstract;
+    private String rewordPoints;
 
     private String productCode;
 
-    private String ProductPicUrl;
+    private String minaPicUrl;
 
     private double discount;
 
@@ -24,7 +26,7 @@ public class ProductUpdateInDTO {
 
     private String description;
 
-    private String otherPicUrls;
+    private List<String> otherPicUrls;
 
     public Integer getProductId() {
         return productId;
@@ -50,12 +52,12 @@ public class ProductUpdateInDTO {
         this.price = price;
     }
 
-    public String getProductAbstract() {
-        return productAbstract;
+    public String getRewordPoints() {
+        return rewordPoints;
     }
 
-    public void setProductAbstract(String productAbstract) {
-        this.productAbstract = productAbstract;
+    public void setRewordPoints(String rewordPoints) {
+        this.rewordPoints = rewordPoints;
     }
 
     public String getProductCode() {
@@ -66,12 +68,12 @@ public class ProductUpdateInDTO {
         this.productCode = productCode;
     }
 
-    public String getProductPicUrl() {
-        return ProductPicUrl;
+    public String getMinaPicUrl() {
+        return minaPicUrl;
     }
 
-    public void setProductPicUrl(String productPicUrl) {
-        ProductPicUrl = productPicUrl;
+    public void setMinaPicUrl(String minaPicUrl) {
+        this.minaPicUrl = minaPicUrl;
     }
 
     public double getDiscount() {
@@ -114,11 +116,11 @@ public class ProductUpdateInDTO {
         this.description = description;
     }
 
-    public String getOtherPicUrls() {
+    public List<String> getOtherPicUrls() {
         return otherPicUrls;
     }
 
-    public void setOtherPicUrls(String otherPicUrls) {
+    public void setOtherPicUrls(List<String> otherPicUrls) {
         this.otherPicUrls = otherPicUrls;
     }
 }
