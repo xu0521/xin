@@ -38,7 +38,7 @@
       #{stockQuantity,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{mainPicUrl,jdbcType=VARCHAR}, 
       #{rewordPoints,jdbcType=INTEGER}, #{sortOrder,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.xuxin.xl050224.entity.Product">
+  <insert id="insertSelective" parameterType="com.xuxin.xl050224.entity.Product" useGeneratedKeys="true" keyProperty="productId">
     insert into xl_product
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="productId != null">
