@@ -4,6 +4,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import HelloWorld from '@/components/HelloWorld'
 import ProductSearch from '@/components/ProductSearch'
+import ProductCreate from '@/components/ProductCreate'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -20,6 +21,11 @@ export default new Router({
       path: '/productSearch',
       name: 'ProductSearch',
       component: ProductSearch
+    },
+    {
+      path: '/productCreate',
+      name: 'ProductCreate',
+      component: ProductCreate
     }
   ]
 })
