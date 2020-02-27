@@ -1,0 +1,68 @@
+<template>
+  <div class="hello">
+    <el-table :data="productList" border style="width: 100%">
+      <el-table-column prop="productId" label="商品编号"></el-table-column>
+      <el-table-column prop="productName" label="商品名称"></el-table-column>
+      <el-table-column prop="price" label="价钱"></el-table-column>
+      <el-table-column prop="productCode" label="商品代码"></el-table-column>
+      <el-table-column prop="discount" label="地址"></el-table-column>
+      <el-table-column prop="stockQuantity" label="库存数量"></el-table-column>
+      <el-table-column prop="status" label="状态"></el-table-column>
+      <el-table-column prop="mainPicUrl" label="图片"></el-table-column>
+    </el-table>
+    <el-pagination :page-size="pageSize" :pager-count="11" layout="prev, pager, next" :total="total" @current-change="currentChange"></el-pagination>
+  </div>
+</template>
+
+<script>
+import axios from "../api/common";
+export default {
+  name: "HelloWorld",
+  data() {
+    return {
+      productList: [],
+      pageSize:5,
+      total:10
+    };
+  },
+  methods: {
+    getProduct(pageNum) {
+      var productSearchInDTO = {
+        params: {
+          pageNum:pageNum
+        }
+      };
+      axios.get("/product/search", productSearchInDTO).then(res => {
+        this.productList = res.data.list;
+        this.total = res.data.total;
+        this.pageSize = res.data.pageSize;
+      });
+    },
+    currentChange(pageNum){
+      this.getProduct(pageNum);
+    }
+  },
+  mounted() {
+    this.getProduct();
+  }
+};
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h1,
+h2 {
+  font-weight: normal;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
