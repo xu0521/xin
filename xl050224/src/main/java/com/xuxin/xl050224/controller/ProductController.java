@@ -1,5 +1,6 @@
 package com.xuxin.xl050224.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xuxin.xl050224.dto.in.ProductCreateInDTO;
 import com.xuxin.xl050224.dto.in.ProductSearchInDTO;
@@ -23,7 +24,10 @@ public class ProductController {
     @GetMapping("/search")
     public PageInfo<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO,
                                               @RequestParam(defaultValue = "1") Integer pageNum){
-        return null;
+        PageHelper.startPage(pageNum,5);
+        List<ProductListOutDTO> productListOutDTOS = productService.search(productSearchInDTO);
+        PageInfo<ProductListOutDTO> pageInfo = new PageInfo<>(productListOutDTOS);
+        return pageInfo;
     }
 
     @PostMapping("/create")
@@ -33,8 +37,9 @@ public class ProductController {
     }
 
     @GetMapping("/getProduct")
-    public ProductShowOutDTO getProduct(@RequestParam Integer ProductId){
-        return null;
+    public ProductShowOutDTO getProduct(@RequestParam Integer productId){
+        ProductShowOutDTO productShowOutDTO = productService.getById(productId);
+        return productShowOutDTO;
     }
 
     @PostMapping("/update")

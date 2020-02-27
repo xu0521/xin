@@ -14,6 +14,16 @@
     <result column="reword_points" jdbcType="INTEGER" property="rewordPoints" />
     <result column="sort_order" jdbcType="INTEGER" property="sortOrder" />
   </resultMap>
+  <resultMap id="ProductListOutDTOMap" type="com.xuxin.xl050224.dto.out.ProductListOutDTO">
+    <id column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="product_code" jdbcType="VARCHAR" property="productCode" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="discount" jdbcType="DOUBLE" property="discount" />
+    <result column="stock_quantity" jdbcType="INTEGER" property="stockQuantity" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="main_pic_url" jdbcType="VARCHAR" property="mainPicUrl" />
+  </resultMap>
   <sql id="Base_Column_List">
     product_id, product_code, product_name, product_abstract, price, discount, stock_quantity, 
     status, main_pic_url, reword_points, sort_order
@@ -23,6 +33,11 @@
     <include refid="Base_Column_List" />
     from xl_product
     where product_id = #{productId,jdbcType=INTEGER}
+  </select>
+  <select id="search" resultMap="ProductListOutDTOMap">
+    select
+    <include refid="Base_Column_List" />
+    from xl_product
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from xl_product

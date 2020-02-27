@@ -2,7 +2,10 @@ package com.xuxin.xl050224.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.xuxin.xl050224.dto.in.ProductCreateInDTO;
+import com.xuxin.xl050224.dto.in.ProductSearchInDTO;
 import com.xuxin.xl050224.dto.in.ProductUpdateInDTO;
+import com.xuxin.xl050224.dto.out.ProductListOutDTO;
+import com.xuxin.xl050224.dto.out.ProductShowOutDTO;
 import com.xuxin.xl050224.entity.Product;
 import com.xuxin.xl050224.entity.ProductDetail;
 import com.xuxin.xl050224.mapper.ProductDetailMapper;
@@ -94,5 +97,37 @@ public class ProductServiceImpl  implements ProductService {
     public void batchDelete(List<Integer> productIds) {
         productMapper.batchDelete(productIds);
         productDetailMapper.batchDelete(productIds);
+    }
+
+    @Override
+    public List<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO) {
+        List<ProductListOutDTO> productListOutDTOS =  productMapper.search(productSearchInDTO);
+        return productListOutDTOS;
+    }
+
+    @Override
+    @Transactional
+    public ProductShowOutDTO getById(Integer productId) {
+        Product product = productMapper.selectByPrimaryKey(productId);
+        ProductDetail productDetail = productDetailMapper.selectByPrimaryKey(productId);
+
+        ProductShowOutDTO productShowOutDTO = new ProductShowOutDTO();
+        productShowOutDTO.setProductId(productId);
+        productShowOutDTO.setProductCode(product.getProductCode());
+        productShowOutDTO.setProductName(product.getProductName());
+        productShowOutDTO.setPrice(product.getPrice());
+        productShowOutDTO.setDiscount(product.getDiscount());
+        productShowOutDTO.setStatus(product.getStatus());
+        productShowOutDTO.setMinaPicUrl(product.getMainPicUrl());
+        productShowOutDTO.setRewordPoints(product.getRewordPoints());
+        productShowOutDTO.setSortOrder(product.getSortOrder());
+        productShowOutDTO.setStockQuantity(product.getStockQuantity());
+
+        productShowOutDTO.setDescription(productDetail.getDescription());
+        String otherPicUrlsJson  = productDetail.getOtherPicUrls();
+        List<String> otherPicUrls = JSON.parseArray(otherPicUrlsJson, String.class);
+        productShowOutDTO.setOtherPicUrls(otherPicUrls);
+
+        return productShowOutDTO;
     }
 }

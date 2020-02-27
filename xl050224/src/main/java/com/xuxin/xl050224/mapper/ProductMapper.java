@@ -1,5 +1,7 @@
 package com.xuxin.xl050224.mapper;
 
+import com.xuxin.xl050224.dto.in.ProductSearchInDTO;
+import com.xuxin.xl050224.dto.out.ProductListOutDTO;
 import com.xuxin.xl050224.entity.Product;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -21,4 +23,6 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
 
     int batchDelete(@Param("productIds") List<Integer> productIds);
+
+    List<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO);
 }
