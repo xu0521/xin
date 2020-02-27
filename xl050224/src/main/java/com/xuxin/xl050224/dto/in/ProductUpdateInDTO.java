@@ -10,7 +10,7 @@ public class ProductUpdateInDTO {
 
     private double price;
 
-    private String rewordPoints;
+    private Integer rewordPoints;
 
     private String productCode;
 
@@ -18,7 +18,7 @@ public class ProductUpdateInDTO {
 
     private double discount;
 
-    private String sortOrder;
+    private Integer sortOrder;
 
     private Integer stockQuantity;
 
@@ -52,11 +52,11 @@ public class ProductUpdateInDTO {
         this.price = price;
     }
 
-    public String getRewordPoints() {
+    public Integer getRewordPoints() {
         return rewordPoints;
     }
 
-    public void setRewordPoints(String rewordPoints) {
+    public void setRewordPoints(Integer rewordPoints) {
         this.rewordPoints = rewordPoints;
     }
 
@@ -84,11 +84,11 @@ public class ProductUpdateInDTO {
         this.discount = discount;
     }
 
-    public String getSortOrder() {
+    public Integer getSortOrder() {
         return sortOrder;
     }
 
-    public void setSortOrder(String sortOrder) {
+    public void setSortOrder(Integer sortOrder) {
         this.sortOrder = sortOrder;
     }
 

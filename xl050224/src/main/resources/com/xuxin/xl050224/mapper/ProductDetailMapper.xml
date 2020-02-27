@@ -26,6 +26,14 @@
     delete from xl_product_detail
     where product_id = #{productId,jdbcType=INTEGER}
   </delete>
+  <delete id="batchDelete">
+    delete from xl_product_detail
+    where product_id in
+    <foreach  item="item" index="index" collection="productIds"
+              open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
   <insert id="insert" parameterType="com.xuxin.xl050224.entity.ProductDetail">
     insert into xl_product_detail (product_id, other_pic_urls, description
       )
