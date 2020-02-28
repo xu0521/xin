@@ -1,32 +1,32 @@
 <template>
   <div class="hello">
-    <el-form ref="form" :model="productCreate" label-width="180px">
+    <el-form ref="form" :model="productUpdate" label-width="180px">
       <el-form-item label="商品名称">
-        <el-input v-model="productCreate.productName"></el-input>
+        <el-input v-model="productUpdate.productName"></el-input>
       </el-form-item>
       <el-form-item label="商品价钱">
-        <el-input v-model="productCreate.price"></el-input>
+        <el-input v-model="productUpdate.price"></el-input>
       </el-form-item>
       <el-form-item label="商品积分">
-        <el-input v-model="productCreate.rewordPoints"></el-input>
+        <el-input v-model="productUpdate.rewordPoints"></el-input>
       </el-form-item>
       <el-form-item label="商品代码">
-        <el-input v-model="productCreate.productCode"></el-input>
+        <el-input v-model="productUpdate.productCode"></el-input>
       </el-form-item>
       <el-form-item label="折扣">
-        <el-input v-model="productCreate.discount"></el-input>
+        <el-input v-model="productUpdate.discount"></el-input>
       </el-form-item>
       <el-form-item label="排序">
-        <el-input v-model="productCreate.sortOrder"></el-input>
+        <el-input v-model="productUpdate.sortOrder"></el-input>
       </el-form-item>
       <el-form-item label="商品库存">
-        <el-input v-model="productCreate.stockQuantity"></el-input>
+        <el-input v-model="productUpdate.stockQuantity"></el-input>
       </el-form-item>
       <el-form-item label="描述">
-        <el-input type="textarea" v-model="productCreate.description"></el-input>
+        <el-input type="textarea" v-model="productUpdate.description"></el-input>
       </el-form-item>
       <el-form-item label="状态">
-        <el-select v-model="productCreate.status" clearable placeholder="请选择">
+        <el-select v-model="statusId" clearable placeholder="请选择">
           <el-option
             v-for="item in status"
             :key="item.value"
@@ -35,7 +35,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="商品主图">
+      <el-form-item label="主图">
         <el-upload
           ref="upload"
           action
@@ -49,6 +49,7 @@
           <el-button slot="trigger" size="small" type="primary">选取主图</el-button>
           <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          <div><el-button type="text">{{productUpdate.minaPicUrl}}</el-button></div>
         </el-upload>
       </el-form-item>
       <el-form-item label="其他图片">
@@ -72,6 +73,7 @@
             @click="submitOtherUpload"
           >上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+          <div><el-button type="text">{{productUpdate.otherPicUrls}}</el-button></div>
         </el-upload>
       </el-form-item>
       <el-form-item>
@@ -88,7 +90,8 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      productCreate: {},
+      productUpdate: {},
+      statusId:"",
       status: [
         {
           value: 1,
@@ -117,6 +120,7 @@ export default {
     },
     submitUpload() {
       this.uploadMainImage();
+      console.log(this.minaPicUrl);
     },
     uploadMainImage() {
       var forData = new FormData();
@@ -127,6 +131,7 @@ export default {
           headers: { "Content-Type": "mutipart/form-data" }
         })
         .then(res => {
+          this.minaPicUrl = "";
           this.minaPicUrl = res.data;
         });
     },
@@ -140,6 +145,7 @@ export default {
       this.uploadOtherImage();
     },
     uploadOtherImage() {
+      this.otherPicUrls = [];
       this.selectedOtherPic.forEach(pic => {
         var forData = new FormData();
         forData.append("file", pic.raw);
@@ -155,17 +161,32 @@ export default {
       });
     },
     onSubmit(){
-      this.productCreate.mainPicUrl = this.minaPicUrl;
-      this.productCreate.otherPicUrls = this.otherPicUrls;
-      axios.post("/product/create", this.productCreate).then(res=>{
+      this.productUpdate.minaPicUrl = this.minaPicUrl;
+      this.productUpdate.otherPicUrls = this.otherPicUrls;
+      axios.post("/product/update", this.productUpdate).then(res=>{
         this.$router.push("/productSearch");
       })
     },
     onReturn(){
      this.$router.push("/productSearch") 
+    },
+    getProductById(productId){
+      axios.get("/product/getProduct", {params:{"productId":productId}}).then(res=>{
+        this.productUpdate = res.data;
+        this.statusId = res.data.status;
+        this.minaPicUrl = res.data.minaPicUrl;
+        res.data.otherPicUrls.forEach(pic=>{
+          this.otherPicUrls.push(pic)
+        })
+        
+      })
     }
   },
-  mounted() {}
+  mounted() {
+    if(this.$route.params){
+      this.getProductById(this.$route.params.productId);
+    }
+  }
 };
 </script>
 

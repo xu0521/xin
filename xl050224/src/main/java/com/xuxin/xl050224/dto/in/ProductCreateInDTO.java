@@ -12,7 +12,7 @@ public class ProductCreateInDTO {
 
     private String productCode;
 
-    private String minaPicUrl;
+    private String mainPicUrl;
 
     private double discount;
 
@@ -59,12 +59,12 @@ public class ProductCreateInDTO {
         this.productCode = productCode;
     }
 
-    public String getMinaPicUrl() {
-        return minaPicUrl;
+    public String getMainPicUrl() {
+        return mainPicUrl;
     }
 
-    public void setMinaPicUrl(String minaPicUrl) {
-        this.minaPicUrl = minaPicUrl;
+    public void setMainPicUrl(String mainPicUrl) {
+        this.mainPicUrl = mainPicUrl;
     }
 
     public double getDiscount() {

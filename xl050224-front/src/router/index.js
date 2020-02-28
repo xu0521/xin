@@ -5,6 +5,7 @@ import 'element-ui/lib/theme-chalk/index.css';
 import HelloWorld from '@/components/HelloWorld'
 import ProductSearch from '@/components/ProductSearch'
 import ProductCreate from '@/components/ProductCreate'
+import productUpdate from '@/components/productUpdate'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -26,6 +27,11 @@ export default new Router({
       path: '/productCreate',
       name: 'ProductCreate',
       component: ProductCreate
+    },
+    {
+      path: '/productUpdate',
+      name: 'ProductUpdate',
+      component: productUpdate
     }
   ]
 })

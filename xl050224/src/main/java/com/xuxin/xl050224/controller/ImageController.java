@@ -11,7 +11,7 @@ public class ImageController {
 
     @RequestMapping("/upload")
     public String upload(MultipartFile file){
-        String fileName = FileUtils.upload(file, "E:\\img", file.getOriginalFilename());
+        String fileName = FileUtils.upload(file, "E:\\movie\\movie", file.getOriginalFilename());
         return fileName;
     }
 

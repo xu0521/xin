@@ -9,7 +9,17 @@
       <el-table-column prop="discount" label="折扣"></el-table-column>
       <el-table-column prop="stockQuantity" label="库存数量"></el-table-column>
       <el-table-column prop="status" label="状态"></el-table-column>
-      <el-table-column prop="mainPicUrl" label="图片"></el-table-column>
+      <el-table-column label="图片">
+        <template slot-scope="scope">
+          <el-image style="width: 100px; height: 100px" :src="'http://localhost/' + scope.row.mainPicUrl" :preview-src-list="srcList"></el-image>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="180">
+        <template slot-scope="scope">
+          <el-button  type="text" size="small">查看</el-button>
+          <el-button type="text" size="small" @click="handleClick(scope.row)">编辑</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-pagination
       :page-size="pageSize"
@@ -29,7 +39,9 @@ export default {
     return {
       productList: [],
       pageSize: 5,
-      total: 10
+      total: 10,
+      url: "",
+      srcList: []
     };
   },
   methods: {
@@ -48,8 +60,11 @@ export default {
     currentChange(pageNum) {
       this.getProduct(pageNum);
     },
-    create(){
+    create() {
       this.$router.push("/productCreate");
+    },
+    handleClick(row){
+      this.$router.push({name:"ProductUpdate" , params:row})
     }
   },
   mounted() {
