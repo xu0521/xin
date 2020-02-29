@@ -23,7 +23,8 @@
         <el-input v-model="productCreate.stockQuantity"></el-input>
       </el-form-item>
       <el-form-item label="描述">
-        <el-input type="textarea" v-model="productCreate.description"></el-input>
+        <!-- <el-input type="textarea" v-model="productCreate.description"></el-input> -->
+        <tinymce-editor v-model="productCreate.description" @onClick="onClick" ref="editor"></tinymce-editor>
       </el-form-item>
       <el-form-item label="状态">
         <el-select v-model="productCreate.status" clearable placeholder="请选择">
@@ -84,7 +85,9 @@
 
 <script>
 import axios from "../api/common";
+import TinymceEditor from '../components/tinymce-edito'
 export default {
+  components: { TinymceEditor },
   name: "HelloWorld",
   data() {
     return {
@@ -154,15 +157,18 @@ export default {
           });
       });
     },
-    onSubmit(){
+    onSubmit() {
       this.productCreate.mainPicUrl = this.minaPicUrl;
       this.productCreate.otherPicUrls = this.otherPicUrls;
-      axios.post("/product/create", this.productCreate).then(res=>{
+      axios.post("/product/create", this.productCreate).then(res => {
         this.$router.push("/productSearch");
-      })
+      });
     },
-    onReturn(){
-     this.$router.push("/productSearch") 
+    onReturn() {
+      this.$router.push("/productSearch");
+    },
+    onClick(e) {
+      //this.$emit("onClick", e, tinymce);
     }
   },
   mounted() {}

@@ -23,7 +23,8 @@
         <el-input v-model="productUpdate.stockQuantity"></el-input>
       </el-form-item>
       <el-form-item label="描述">
-        <el-input type="textarea" v-model="productUpdate.description"></el-input>
+        <!-- <el-input type="textarea" v-model="productUpdate.description"></el-input> -->
+        <tinymce-editor v-model="productUpdate.description" ref="editor"></tinymce-editor>
       </el-form-item>
       <el-form-item label="状态">
         <el-select v-model="statusId" clearable placeholder="请选择">
@@ -86,7 +87,9 @@
 
 <script>
 import axios from "../api/common";
+import TinymceEditor from '../components/tinymce-edito';
 export default {
+  components: { TinymceEditor },
   name: "HelloWorld",
   data() {
     return {
