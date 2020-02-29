@@ -26,6 +26,8 @@ public class ProductUpdateInDTO {
 
     private String description;
 
+    private String productAbstract;
+
     private List<String> otherPicUrls;
 
     public Integer getProductId() {
@@ -122,5 +124,13 @@ public class ProductUpdateInDTO {
 
     public void setOtherPicUrls(List<String> otherPicUrls) {
         this.otherPicUrls = otherPicUrls;
+    }
+
+    public String getProductAbstract() {
+        return productAbstract;
+    }
+
+    public void setProductAbstract(String productAbstract) {
+        this.productAbstract = productAbstract;
     }
 }
