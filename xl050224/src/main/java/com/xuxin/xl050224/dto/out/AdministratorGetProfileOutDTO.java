@@ -12,8 +12,6 @@ public class AdministratorGetProfileOutDTO {
 
     private String  encryptedPassword;
 
-    private byte status;
-
     private Long createTime;
 
     private String avatarUrl;
@@ -56,14 +54,6 @@ public class AdministratorGetProfileOutDTO {
 
     public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
-    }
-
-    public byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(byte status) {
-        this.status = status;
     }
 
     public Long getCreateTime() {

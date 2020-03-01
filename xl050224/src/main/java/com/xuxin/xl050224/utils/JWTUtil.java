@@ -2,8 +2,11 @@ package com.xuxin.xl050224.utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.auth0.jwt.interfaces.JWTVerifier;
 import com.xuxin.xl050224.dto.out.AdministratorLoginOutDTO;
 import com.xuxin.xl050224.entity.Administrator;
+import com.xuxin.xl050224.vo.AdministratorLoginVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +57,7 @@ public class JWTUtil {
         return administratorLoginOutDTO;
     }
 
-    /*public AdministratorLoginVO verifyToken(String token) {
+    public AdministratorLoginVO verifyToken(String token) {
         JWTVerifier verifier = JWT.require(algorithm)
                 .withIssuer(issuer)
                 .build();
@@ -65,5 +68,5 @@ public class JWTUtil {
         administratorLoginVO.setAdministratorId(jwt.getClaim("administratorId").asInt());
         administratorLoginVO.setUsername(jwt.getSubject());
         return administratorLoginVO;
-    }*/
+    }
 }

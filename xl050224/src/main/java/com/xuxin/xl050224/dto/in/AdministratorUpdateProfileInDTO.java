@@ -8,8 +8,6 @@ public class AdministratorUpdateProfileInDTO {
 
     private String avatarUrl;
 
-    private String password;
-
     private byte status;
 
     public String getRealName() {
@@ -34,14 +32,6 @@ public class AdministratorUpdateProfileInDTO {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public byte getStatus() {

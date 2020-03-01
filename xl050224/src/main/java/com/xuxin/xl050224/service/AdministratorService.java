@@ -6,4 +6,6 @@ public interface AdministratorService {
 
     Administrator getByUsername(String username);
 
+    Administrator getById(Integer administratorId);
+
 }
