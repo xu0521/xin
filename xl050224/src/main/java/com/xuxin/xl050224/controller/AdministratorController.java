@@ -1,22 +1,47 @@
 package com.xuxin.xl050224.controller;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.github.pagehelper.PageInfo;
+import com.xuxin.xl050224.constant.ClientExceptionConstant;
 import com.xuxin.xl050224.dto.in.*;
 import com.xuxin.xl050224.dto.out.AdministratorGetProfileOutDTO;
 import com.xuxin.xl050224.dto.out.AdministratorListOutDTO;
+import com.xuxin.xl050224.dto.out.AdministratorLoginOutDTO;
 import com.xuxin.xl050224.dto.out.AdministratorShowOutDTO;
+import com.xuxin.xl050224.entity.Administrator;
+import com.xuxin.xl050224.exception.ClientException;
+import com.xuxin.xl050224.service.AdministratorService;
+import com.xuxin.xl050224.utils.JWTUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/administrator")
+    @RequestMapping("/administrator")
 public class AdministratorController {
+
+    @Autowired
+    private AdministratorService administratorService;
+
+    @Autowired
+    private JWTUtil jwtUtil;
 
     //登录
     @GetMapping("/login")
-    public String login( AdministratorLoginInDTO administratorLoginInDTO){
-        return null;
+    public AdministratorLoginOutDTO login( AdministratorLoginInDTO administratorLoginInDTO) throws ClientException {
+        Administrator byUsername = administratorService.getByUsername(administratorLoginInDTO.getUsername());
+        if (byUsername == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_USERNAME_NOT_EXIST_ERRMSG);
+        }
+        String encryptedPassword = byUsername.getEncryptedPassword();
+         BCrypt.Result verify = BCrypt.verifyer().verify(administratorLoginInDTO.getPassword().toCharArray(), encryptedPassword);
+        if (verify.verified){
+            AdministratorLoginOutDTO administratorLoginOutDTO = jwtUtil.issueToken(byUsername);
+            return administratorLoginOutDTO;
+        }else{
+            throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRMSG);
+        }
     }
 
     //查询注册信息

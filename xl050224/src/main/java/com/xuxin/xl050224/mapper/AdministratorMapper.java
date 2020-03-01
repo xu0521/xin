@@ -1,6 +1,7 @@
 package com.xuxin.xl050224.mapper;
 
 import com.xuxin.xl050224.entity.Administrator;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -16,4 +17,6 @@ public interface AdministratorMapper {
     int updateByPrimaryKeySelective(Administrator record);
 
     int updateByPrimaryKey(Administrator record);
+
+    Administrator selectByUserName(@Param("username") String username);
 }
