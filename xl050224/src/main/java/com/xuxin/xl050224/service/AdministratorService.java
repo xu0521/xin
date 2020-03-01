@@ -8,4 +8,6 @@ public interface AdministratorService {
 
     Administrator getById(Integer administratorId);
 
+    void update(Administrator administrator);
+
 }

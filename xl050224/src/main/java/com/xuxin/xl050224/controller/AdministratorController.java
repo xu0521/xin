@@ -63,7 +63,12 @@ public class AdministratorController {
     @PostMapping("/updateProfile")
     public  void updateProfile(@RequestBody AdministratorUpdateProfileInDTO administratorUpdateProfileInDTO,
                                @RequestAttribute Integer administratorId){
-
+        Administrator administrator = new Administrator();
+        administrator.setAdministratorId(administratorId);
+        administrator.setRealName(administratorUpdateProfileInDTO.getRealName());
+        administrator.setAvatarUrl(administratorUpdateProfileInDTO.getAvatarUrl());
+        administrator.setEmail(administratorUpdateProfileInDTO.getEmail());
+        administratorService.update(administrator);
     }
 
     @PostMapping("/changePwd")
