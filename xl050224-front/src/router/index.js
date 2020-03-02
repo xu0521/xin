@@ -6,6 +6,7 @@ import HelloWorld from '@/components/HelloWorld'
 import ProductSearch from '@/components/ProductSearch'
 import ProductCreate from '@/components/ProductCreate'
 import productUpdate from '@/components/productUpdate'
+import AdministratorLogin from '@/components/AdministratorLogin'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -32,6 +33,11 @@ export default new Router({
       path: '/productUpdate',
       name: 'ProductUpdate',
       component: productUpdate
+    },
+    {
+      path: '/administratorLogin',
+      name: 'AdministratorLogin',
+      component: AdministratorLogin
     }
   ]
 })
