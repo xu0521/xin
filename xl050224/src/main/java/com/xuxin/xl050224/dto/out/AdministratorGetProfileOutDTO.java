@@ -10,8 +10,6 @@ public class AdministratorGetProfileOutDTO {
 
     private String email;
 
-    private String  encryptedPassword;
-
     private Long createTime;
 
     private String avatarUrl;
@@ -46,14 +44,6 @@ public class AdministratorGetProfileOutDTO {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getEncryptedPassword() {
-        return encryptedPassword;
-    }
-
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
     }
 
     public Long getCreateTime() {
