@@ -12,6 +12,8 @@ public class AdministratorUpdateInDTO {
 
     private byte status;
 
+    private String avatarUrl;
+
     public Integer getAdministratorId() {
         return administratorId;
     }
@@ -50,5 +52,13 @@ public class AdministratorUpdateInDTO {
 
     public void setStatus(byte status) {
         this.status = status;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

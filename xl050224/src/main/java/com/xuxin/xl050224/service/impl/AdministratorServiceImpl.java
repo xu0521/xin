@@ -6,6 +6,8 @@ import com.xuxin.xl050224.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdministratorServiceImpl implements AdministratorService {
 
@@ -26,7 +28,34 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
+    public void updateProfile(Administrator administrator) {
+        administratorMapper.updateByPrimaryKeySelective(administrator);
+    }
+
+    @Override
+    public Integer create(Administrator administrator) {
+        administratorMapper.insertSelective(administrator);
+        return administrator.getAdministratorId();
+    }
+
+    @Override
     public void update(Administrator administrator) {
         administratorMapper.updateByPrimaryKeySelective(administrator);
+    }
+
+    @Override
+    public void delete(Integer administratorId) {
+        administratorMapper.deleteByPrimaryKey(administratorId);
+    }
+
+    @Override
+    public void batchDelete(List<Integer> administratorIds) {
+        administratorMapper.batchDelete(administratorIds);
+    }
+
+    @Override
+    public List<Administrator> getList() {
+        List<Administrator> administrators = administratorMapper.getList();
+        return administrators;
     }
 }

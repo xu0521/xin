@@ -27,9 +27,22 @@
       from xl_administrator
       where username = #{username}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <select id="getList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from xl_administrator
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from xl_administrator
     where administrator_id = #{administratorId,jdbcType=INTEGER}
+  </delete>
+  <delete id="batchDelete">
+    delete  from xl_administrator
+    where administrator_id in 
+    <foreach item="item" index="index" collection="administratorIds"
+              open="(" separator="," close=")">
+    #{item}
+    </foreach>
   </delete>
   <insert id="insert" parameterType="com.xuxin.xl050224.entity.Administrator">
     insert into xl_administrator (administrator_id, username, real_name, 
@@ -39,12 +52,9 @@
       #{email,jdbcType=VARCHAR}, #{encryptedPassword,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
       #{createTime,jdbcType=TIMESTAMP}, #{avatarUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.xuxin.xl050224.entity.Administrator">
+  <insert id="insertSelective" parameterType="com.xuxin.xl050224.entity.Administrator" useGeneratedKeys="true" keyProperty="administratorId">
     insert into xl_administrator
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="administratorId != null">
-        administrator_id,
-      </if>
       <if test="username != null">
         username,
       </if>
@@ -68,9 +78,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="administratorId != null">
-        #{administratorId,jdbcType=INTEGER},
-      </if>
       <if test="username != null">
         #{username,jdbcType=VARCHAR},
       </if>

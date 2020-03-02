@@ -4,6 +4,8 @@ import com.xuxin.xl050224.entity.Administrator;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AdministratorMapper {
     int deleteByPrimaryKey(Integer administratorId);
@@ -19,4 +21,8 @@ public interface AdministratorMapper {
     int updateByPrimaryKey(Administrator record);
 
     Administrator selectByUserName(@Param("username") String username);
+
+    int batchDelete(@Param("administratorIds") List<Integer> administratorIds);
+
+    List<Administrator> getList();
 }
