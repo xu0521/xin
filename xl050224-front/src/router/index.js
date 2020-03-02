@@ -8,6 +8,7 @@ import ProductCreate from '@/components/ProductCreate'
 import productUpdate from '@/components/productUpdate'
 import AdministratorLogin from '@/components/AdministratorLogin'
 import AdministratorUpdateProfile from '@/components/AdministratorUpdateProfile'
+import AdministratorCreate from '@/components/AdministratorCreate'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -44,6 +45,11 @@ export default new Router({
       path: '/administratorUpdateProfile',
       name: 'AdministratorUpdateProfile',
       component: AdministratorUpdateProfile
+    },
+    {
+      path: '/administratorCreate',
+      name: 'AdministratorCreate',
+      component: AdministratorCreate
     }
   ]
 })
