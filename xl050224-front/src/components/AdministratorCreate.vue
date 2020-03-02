@@ -59,6 +59,9 @@ export default {
         .post("/administrator/create", this.administratorCreate)
         .then(res => {});
     }
+  },
+  mounted(){
+    
   }
 };
 </script>
