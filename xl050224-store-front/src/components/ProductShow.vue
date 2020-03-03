@@ -65,6 +65,7 @@ export default {
       newProduct.totalPrice = this.productShow.price * this.quantity;
       this.myShoppingCart.push(newProduct)
       localStorage['myShoppingCart'] = JSON.stringify(this.myShoppingCart);
+      this.$message.success("添加购物车成功")
     },
     onReturn(){
 

@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <el-table :data="myShoppingCart" border style="width: 100%">
-      <el-table-column prop="mainPicUrl"  label="主图">
+      <el-table-column prop="mainPicUrl" label="主图">
         <!-- <el-image style="width: 100px; height: 100px" :src="'http://localhost:80/'+mainPicUrl"></el-image> -->
       </el-table-column>
       <el-table-column prop="productCode" label="商品代号"></el-table-column>
@@ -9,6 +9,12 @@
       <el-table-column prop="unitPrice" label="单价"></el-table-column>
       <el-table-column prop="quantity" label="数量"></el-table-column>
       <el-table-column prop="totalPrice" label="总价"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="180">
+        <template slot-scope="scope">
+          <el-button @click="handleDelete(scope.$index,scope.row)" type="text" size="small">删除</el-button>
+          <el-button type="text" size="small">编辑</el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -18,16 +24,19 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      myShoppingCart:[]
+      myShoppingCart: []
     };
   },
-  methods:{
-
+  methods: {
+    handleDelete(index,row){
+      this.myShoppingCart.splice(index,1);
+      localStorage['myShoppingCartJson'] = JSON.stringify(this.myShoppingCart);
+    }
   },
-  mounted(){
-    var myShoppingCart = localStorage['myShoppingCart'];
-    this.myShoppingCart = JSON.parse(myShoppingCart);
-    console.log(myShoppingCart)
+  mounted() {
+    var myShoppingCartJson = localStorage["myShoppingCartJson"];
+    this.myShoppingCart = JSON.parse(myShoppingCartJson);
+    console.log(this.myShoppingCart);
   }
 };
 </script>
