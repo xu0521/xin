@@ -10,7 +10,7 @@ public class ProductShowOutDTO {
 
     private double price;
 
-    private String rewordPoints;
+    private Integer rewordPoints;
 
     private String productCode;
 
@@ -52,11 +52,11 @@ public class ProductShowOutDTO {
         this.price = price;
     }
 
-    public String getRewordPoints() {
+    public Integer getRewordPoints() {
         return rewordPoints;
     }
 
-    public void setRewordPoints(String rewordPoints) {
+    public void setRewordPoints(Integer rewordPoints) {
         this.rewordPoints = rewordPoints;
     }
 

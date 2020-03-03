@@ -35,7 +35,6 @@ export default {
         }
       }
       axios.get("/administrator/login",administrator).then(res=>{
-        console.log(res.data)
         var dto = res.data;
         localStorage['jcartToken'] = dto.token;
         localStorage['expireTimestamp'] = dto.expireTimestamp;
