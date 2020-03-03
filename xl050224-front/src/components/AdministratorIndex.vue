@@ -1,6 +1,15 @@
 <template>
   <div class="hello">
-    <el-table :data="administratorList" border style="width: 100%">
+    <el-button type="primary" plain @click="administratorCreate">添加</el-button>
+    <el-button type="danger" plain @click="headleBatchDelete">批量删除</el-button>
+    <el-table
+      ref="multipleTable"
+      :data="administratorList"
+      tooltip-effect="dark"
+      style="width: 100%"
+      @selection-change="handleSelectionChange"
+    >
+      <el-table-column type="selection" width="55"></el-table-column>
       <el-table-column prop="username" label="用户名"></el-table-column>
       <el-table-column prop="realName" label="姓名"></el-table-column>
       <el-table-column prop="status" label="状态"></el-table-column>
@@ -30,10 +39,17 @@ export default {
     return {
       administratorList: [],
       pageSize: 5,
-      total: 0
+      total: 0,
+      selectedAdministrators:[]
     };
   },
+  computed:{
+    selectedAdministratorIds(){
+      return this.selectedAdministrators.map(a => a.administratorId);
+    }
+  },
   methods: {
+    //列表显示
     getAdministratorList(pageNum) {
       axios
         .get("/administrator/getList", { params: { pageNum: pageNum } })
@@ -43,21 +59,41 @@ export default {
           this.pageSize = res.data.pageSize;
         });
     },
+    //页码
     currentChange(pageNum) {
       this.getAdministratorList(pageNum);
     },
-    handleClick(row){
-      this.$router.push({name:"AdministratorUpdate" , params:row})
+    //修改
+    handleClick(row) {
+      this.$router.push({ name: "AdministratorUpdate", params: row });
     },
-    handleDelete(row){
+    //单删
+    handleDelete(row) {
       var administratorId = row.administratorId;
-      if(confirm("确认删除？")){
-        axios.post("/administrator/delete",administratorId,
-        {
-          headers:{
-            'Content-Type':'application/json'
-          }
-        }).then(res=>{
+      if (confirm("确认删除？")) {
+        axios
+          .post("/administrator/delete", administratorId, {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          })
+          .then(res => {
+            this.getAdministratorList();
+          });
+      }
+    },
+    //添加
+    administratorCreate() {
+      this.$router.push("/administratorCreate");
+    },
+    //全选
+    handleSelectionChange(val){
+      this.selectedAdministrators = val;
+    },
+    //批量删除
+    headleBatchDelete(){
+      if (confirm("确认删除？")) {
+        axios.post("/administrator/batchDelete",this.selectedAdministratorIds).then(res=>{
           this.getAdministratorList();
         })
       }

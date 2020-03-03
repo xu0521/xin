@@ -28,7 +28,7 @@
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click="onSubmit">立即创建</el-button>
-        <el-button>取消</el-button>
+        <el-button @click="onRetuen">取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -57,7 +57,12 @@ export default {
     onSubmit() {
       axios
         .post("/administrator/create", this.administratorCreate)
-        .then(res => {});
+        .then(res => {
+          this.$router.push("/adminitratorIndex")
+        });
+    },
+    onRetuen(){
+       this.$router.push("/administratorIndex")
     }
   },
   mounted(){

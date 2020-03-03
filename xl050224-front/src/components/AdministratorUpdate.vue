@@ -68,7 +68,9 @@ export default {
     onSubmit() {
       axios
         .post("/administrator/update", this.administratorUpdate)
-        .then(res => {});
+        .then(res => {
+          this.$router.push("/adminitratorIndex")
+        });
     },
     onRetuen(){
        this.$router.push("/administratorIndex")
