@@ -1,5 +1,6 @@
 package com.xuxin.xl050224storeback.controller;
 
+import com.xuxin.xl050224storeback.util.FileUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +12,8 @@ public class ImageController {
 
     @RequestMapping("/upload")
     public String upload(@RequestParam MultipartFile file){
-        return null;
+        String fileName = FileUtils.upload(file, "E:\\movie\\movie", file.getOriginalFilename());
+        return fileName;
     }
 
 }
