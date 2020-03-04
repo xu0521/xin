@@ -1,6 +1,7 @@
 package com.xuxin.xl050224storeback.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.xuxin.xl050224storeback.dto.in.ProductSearchInDTO;
 import com.xuxin.xl050224storeback.dto.out.ProductShowOutDTO;
 import com.xuxin.xl050224storeback.entity.Product;
 import com.xuxin.xl050224storeback.entity.ProductDetail;
@@ -46,5 +47,11 @@ public class ProductServiceImpl implements ProductService {
 
 
         return productShowOutDTO;
+    }
+
+    @Override
+    public List<Product> getList(ProductSearchInDTO productSearchInDTO) {
+        List<Product> products = productMapper.selectProduct(productSearchInDTO);
+        return products;
     }
 }

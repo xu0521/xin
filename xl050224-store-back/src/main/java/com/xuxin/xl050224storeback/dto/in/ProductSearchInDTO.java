@@ -10,7 +10,7 @@ public class ProductSearchInDTO {
 
     private byte status;
 
-    private String pageCode;
+    private String productCode;
 
 
     public String getProductName() {
@@ -45,11 +45,11 @@ public class ProductSearchInDTO {
         this.status = status;
     }
 
-    public String getPageCode() {
-        return pageCode;
+    public String getProductCode() {
+        return productCode;
     }
 
-    public void setPageCode(String pageCode) {
-        this.pageCode = pageCode;
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
     }
 }
