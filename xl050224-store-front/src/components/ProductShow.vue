@@ -49,7 +49,6 @@ export default {
     getProductShow(productId){
       axios.get("/product/getById",{params:{productId:productId}}).then(res=>{
         this.productShow = res.data;
-        console.log(res.data)
       })
     },
     onSubmit(){
@@ -84,11 +83,13 @@ export default {
       this.$message.success("添加购物车成功")
     },
     onReturn(){
-
+      this.$router.push("/productSearch")
     }
   },
   mounted(){
-    this.getProductShow(4)
+    if(this.$route.params){
+      this.getProductShow(this.$route.params.productId)
+    }  
     var myShoppingCartJson = localStorage['myShoppingCartJson'];
     this.myShoppingCart = myShoppingCartJson ? JSON.parse(myShoppingCartJson) : [];
   }
