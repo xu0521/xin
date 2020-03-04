@@ -24,15 +24,15 @@ public class ProductController {
 
     @GetMapping("/search")
     public PageInfo<Product> search(ProductSearchInDTO productSearchInDTO,
-                                    @RequestParam(defaultValue = "1") Integer pageNum){
-        PageHelper.startPage(pageNum,5);
+                                    @RequestParam(defaultValue = "1") Integer pageNum) {
+        PageHelper.startPage(pageNum, 5);
         List<Product> products = productService.getList(productSearchInDTO);
         PageInfo<Product> pageInfo = new PageInfo<>(products);
         return pageInfo;
     }
 
     @GetMapping("/getById")
-    public ProductShowOutDTO getProduct(@RequestParam Integer productId){
+    public ProductShowOutDTO getProduct(@RequestParam Integer productId) {
         ProductShowOutDTO productShowOutDTO = productService.getById(productId);
         return productShowOutDTO;
     }

@@ -39,7 +39,7 @@ export default {
     return {
       productList: [],
       pageSize: 5,
-      total: 10,
+      total: 0,
       url: "",
       srcList: []
     };
