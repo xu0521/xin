@@ -7,12 +7,20 @@
       <el-table-column prop="productCode" label="商品代号"></el-table-column>
       <el-table-column prop="productName" label="商品名称"></el-table-column>
       <el-table-column prop="unitPrice" label="单价"></el-table-column>
-      <el-table-column prop="quantity" label="数量"></el-table-column>
-      <el-table-column prop="totalPrice" label="总价"></el-table-column>
+      <el-table-column  label="数量">
+        <template slot-scope="scope">
+          <el-input placeholder="请输入数量" v-model="scope.row.quantity" type="number" clearable style="width:180px"></el-input>
+          <el-button @click="handleUpdateQuantity(scope.row)" type="text" size="small">修改</el-button>
+        </template>
+      </el-table-column>
+      <el-table-column prop="totalPrice" label="总价">
+        <template slot-scope="scope">
+          {{(scope.row.unitPrice * scope.row.quantity).toFixed(2)}}
+        </template>
+      </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
           <el-button @click="handleDelete(scope.$index,scope.row)" type="text" size="small">删除</el-button>
-          <el-button type="text" size="small">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -28,15 +36,18 @@ export default {
     };
   },
   methods: {
-    handleDelete(index,row){
-      this.myShoppingCart.splice(index,1);
-      localStorage['myShoppingCartJson'] = JSON.stringify(this.myShoppingCart);
+    handleDelete(index, row) {
+      this.myShoppingCart.splice(index, 1);
+      localStorage["myShoppingCartJson"] = JSON.stringify(this.myShoppingCart);
+    },
+    handleUpdateQuantity(row){
+      localStorage["myShoppingCartJson"] = JSON.stringify(this.myShoppingCart);
+      this.$message.success("修改成功");
     }
   },
   mounted() {
     var myShoppingCartJson = localStorage["myShoppingCartJson"];
-    this.myShoppingCart = JSON.parse(myShoppingCartJson);
-    console.log(this.myShoppingCart);
+    this.myShoppingCart = myShoppingCartJson ? JSON.parse(myShoppingCartJson):[];
   }
 };
 </script>

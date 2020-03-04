@@ -59,12 +59,28 @@ export default {
         productName: this.productShow.productName,
         mainPicUrl: this.productShow.minaPicUrl,
         unitPrice: this.productShow.price,
-        quantity: this.quantity,
+        quantity: this.quantity
         
+      }    
+      var myShoppingCartJson = localStorage['myShoppingCartJson'];
+      this.myShoppingCart = myShoppingCartJson ? JSON.parse(myShoppingCartJson) : [];
+
+      var carProduct = this.myShoppingCart.find(p => p.productId === this.productShow.productId);
+      if(carProduct){
+        var originQuantity = parseInt(carProduct.quantity);
+        carProduct.quantity =  originQuantity + parseInt(this.quantity);
+      }else{
+        carProduct = {
+          productId: this.productShow.productId,
+          productCode: this.productShow.productCode,
+          productName: this.productShow.productName,
+          mainPicUrl: this.productShow.minaPicUrl,
+          unitPrice: this.productShow.price,
+          quantity: this.quantity
+        } 
+        this.myShoppingCart.push(carProduct)
       }
-      newProduct.totalPrice = this.productShow.price * this.quantity;
-      this.myShoppingCart.push(newProduct)
-      localStorage['myShoppingCart'] = JSON.stringify(this.myShoppingCart);
+      localStorage['myShoppingCartJson'] = JSON.stringify(this.myShoppingCart);
       this.$message.success("添加购物车成功")
     },
     onReturn(){
@@ -73,8 +89,8 @@ export default {
   },
   mounted(){
     this.getProductShow(4)
-    var myShoppingCart = localStorage['myShoppingCart'];
-    this.myShoppingCart = myShoppingCart ? JSON.parse(myShoppingCart) : [];
+    var myShoppingCartJson = localStorage['myShoppingCartJson'];
+    this.myShoppingCart = myShoppingCartJson ? JSON.parse(myShoppingCartJson) : [];
   }
 }
 </script>
