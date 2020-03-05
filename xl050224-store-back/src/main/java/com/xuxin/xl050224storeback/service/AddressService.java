@@ -10,4 +10,6 @@ public interface AddressService {
 
     List<Address> getAddressList(Integer customerId);
 
+    Address getById(Integer addressId);
+
 }
