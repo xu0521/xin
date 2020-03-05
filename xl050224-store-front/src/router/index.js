@@ -6,6 +6,8 @@ import HelloWorld from '@/components/HelloWorld'
 import ShoppingCart from '@/components/ShoppingCart'
 import ProductShow from '@/components/ProductShow'
 import ProductSearch from '@/components/ProductSearch'
+import OrderCheckout from '@/components/OrderCheckout'
+import CustomerLogin from '@/components/CustomerLogin'
 
 
 Vue.use(Router)
@@ -33,6 +35,16 @@ export default new Router({
       path: '/shoppingCart',
       name: 'ShoppingCart',
       component: ShoppingCart
+    },
+    {
+      path: '/orderCheckout',
+      name: 'OrderCheckout',
+      component: OrderCheckout
+    },
+    {
+      path: '/customerLogin',
+      name: 'CustomerLogin',
+      component: CustomerLogin
     }
   ]
 })
