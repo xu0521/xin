@@ -27,7 +27,28 @@
     from xl_customer
     where customer_id = #{customerId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="search" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from xl_customer
+      where 1=1
+      <if test="username != null and username != '' ">
+        and username like concat('%',#{username},'%')
+      </if>
+      <if test="realName != null and realName != '' ">
+        and realName like concat('%',#{realName},'%')
+      </if>
+      <if test="mobile != null and mobile != '' ">
+        and mobile like concat('%',#{mobile},'%')
+      </if>
+      <if test="email != null and email != '' ">
+        and email like concat('%',#{email},'%')
+      </if>
+      <if test="status != null and status != '' ">
+        and status = status
+      </if>
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from xl_customer
     where customer_id = #{customerId,jdbcType=INTEGER}
   </delete>

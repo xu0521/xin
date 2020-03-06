@@ -1,7 +1,10 @@
 package com.xuxin.xl050224.mapper;
 
+import com.xuxin.xl050224.dto.in.CustomerSearchInDTO;
 import com.xuxin.xl050224.entity.Customer;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface CustomerMapper {
@@ -16,4 +19,6 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    List<Customer> search(CustomerSearchInDTO customerSearchInDTO);
 }

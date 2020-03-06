@@ -24,6 +24,8 @@ public class CustomerShowOutDTO {
 
     private String avatarUrl;
 
+    private String defaultAddress;
+
     public Integer getCustomerId() {
         return customerId;
     }
@@ -110,5 +112,13 @@ public class CustomerShowOutDTO {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    public String getDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public void setDefaultAddress(String defaultAddress) {
+        this.defaultAddress = defaultAddress;
     }
 }
