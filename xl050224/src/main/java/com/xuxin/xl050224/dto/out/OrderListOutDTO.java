@@ -1,5 +1,9 @@
 package com.xuxin.xl050224.dto.out;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.util.Date;
+
 public class OrderListOutDTO {
 
     private Long orderId;
@@ -12,7 +16,13 @@ public class OrderListOutDTO {
 
     private double totalPrice;
 
+    @JsonIgnore
+    private Date createTime;
+
     private Long createTimestamp;
+
+    @JsonIgnore
+    private Date updateTime;
 
     private Long updateTimestamp;
 
@@ -57,18 +67,26 @@ public class OrderListOutDTO {
     }
 
     public Long getCreateTimestamp() {
-        return createTimestamp;
-    }
-
-    public void setCreateTimestamp(Long createTimestamp) {
-        this.createTimestamp = createTimestamp;
+        return this.createTime == null ? null : this.createTime.getTime();
     }
 
     public Long getUpdateTimestamp() {
-        return updateTimestamp;
+        return this.updateTime == null ? null : this.updateTime.getTime();
     }
 
-    public void setUpdateTimestamp(Long updateTimestamp) {
-        this.updateTimestamp = updateTimestamp;
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }

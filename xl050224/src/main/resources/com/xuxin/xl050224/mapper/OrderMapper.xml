@@ -10,6 +10,15 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+  <resultMap id="OrderListOutDTO" type="com.xuxin.xl050224.dto.out.OrderListOutDTO">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="customer_id" jdbcType="INTEGER" property="customerId" />
+    <result column="real_name" jdbcType="VARCHAR" property="customerName" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="total_price" jdbcType="DOUBLE" property="totalPrice" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
   <sql id="Base_Column_List">
     order_id, customer_id, status, total_price, reword_points, create_time, update_time
   </sql>
@@ -19,7 +28,17 @@
     from xl_order
     where order_id = #{orderId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectOrderList" resultMap="OrderListOutDTO">
+    SELECT
+        o.*,
+        c.real_name
+    FROM
+        xl_order AS o
+        LEFT JOIN xl_customer AS c ON o.customer_id = c.customer_id
+    ORDER BY
+        create_time DESC
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from xl_order
     where order_id = #{orderId,jdbcType=BIGINT}
   </delete>
