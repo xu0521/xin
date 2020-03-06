@@ -41,6 +41,40 @@
           ></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="商品">
+        <el-table :data="myShoppingCart" border style="width: 100%">
+          <el-table-column prop="productCode" label="商品代码"></el-table-column>
+          <el-table-column prop="productName" label="商品名称"></el-table-column>
+          <el-table-column label="价格">
+            <template slot-scope="scope">
+              单价：{{scope.row.unitPrice}}
+              <br />
+              打折：{{scope.row.discount}}
+              <br />
+              折后价：
+              {{(scope.row.unitPrice * scope.row.discount).toFixed(2)}}
+            </template>
+          </el-table-column>
+          <el-table-column prop="quantity" label="数量"></el-table-column>
+          <el-table-column label="总计">
+            <template
+              slot-scope="scope"
+            >{{(scope.row.unitPrice * scope.row.quantity * scope.row.discount).toFixed(2)}}</template>
+          </el-table-column>
+        </el-table>
+        总价：{{totablePrice}}
+        <br />
+        邮费：{{shipPrice}}
+        <br />
+        支付价：{{payPrice}}
+      </el-form-item>
+      <el-form-item label="备注">
+        <el-input type="textarea" :rows="5" placeholder="请输入备注内容" v-model="orderCheckout.comment"></el-input>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="checkoutOrder">立即创建</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -51,7 +85,7 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      orderCheckout:{},
+      orderCheckout: {},
       myAddresses: [],
       shipMethods: [
         {
@@ -100,18 +134,56 @@ export default {
       selectedShipAddressId: "",
       selectedShipMethod: "",
       selectedInvoiceAddredssId: "",
-      selectedPayMethod: ""
+      selectedPayMethod: "",
+      myShoppingCart: [],
+      shipPrice: 5.0
     };
+  },
+  computed: {
+    totablePrice() {
+      var suTotalPrices = this.myShoppingCart.map(p => {
+        return p.unitPrice * p.discount * p.quantity;
+      });
+      var totablePrice = suTotalPrices.reduce((a, b) => a + b, 0);
+      var totablePriceStr = totablePrice.toFixed(2);
+      totablePrice = parseFloat(totablePriceStr);
+      return totablePrice;
+    },
+    payPrice() {
+      return this.totablePrice + this.shipPrice;
+    },
+    orderProducts() {
+      var orderProducts = this.myShoppingCart.map(p => {
+        var orderPrduct = new Object();
+        orderPrduct.productId = p.productId;
+        orderPrduct.quantity = p.quantity;
+        return orderPrduct;
+      });
+      return orderProducts;
+    }
   },
   methods: {
     getMyAddress() {
       axios.get("/address/getListByCustomerId").then(res => {
         this.myAddresses = res.data;
       });
+    },
+    checkoutOrder() {
+      this.orderCheckout.shipAddressId = this.selectedShipAddressId;
+      this.orderCheckout.shipMethod = this.selectedShipMethod;
+      this.orderCheckout.payMethod = this.selectedPayMethod;
+      this.orderCheckout.invoiceAddressId = this.selectedInvoiceAddredssId;
+      this.orderCheckout.orderProducts = this.orderProducts;
+      console.log(this.orderCheckout);
+      axios.post("/order/checkout", this.orderCheckout).then(res => {});
     }
   },
   mounted() {
     this.getMyAddress();
+    var myShoppingCartJson = localStorage["myShoppingCartJson"];
+    this.myShoppingCart = myShoppingCartJson
+      ? JSON.parse(myShoppingCartJson)
+      : [];
   }
 };
 </script>
