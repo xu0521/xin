@@ -99,4 +99,10 @@ public class OrderServiceImpl implements OrderService {
 
         return orderId;
     }
+
+    @Override
+    public List<Order> selectOrderByCustomer(Integer customerId) {
+        List<Order> orders = orderMapper.selectByCustomer(customerId);
+        return orders;
+    }
 }
