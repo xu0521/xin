@@ -9,6 +9,7 @@ import ProductSearch from '@/components/ProductSearch'
 import OrderCheckout from '@/components/OrderCheckout'
 import CustomerLogin from '@/components/CustomerLogin'
 import OrderIndex from '@/components/OrderIndex'
+import OrderShow from '@/components/OrderShow'
 
 
 Vue.use(Router)
@@ -51,6 +52,11 @@ export default new Router({
       path: '/orderIndex',
       name: 'OrderIndex',
       component: OrderIndex
+    },
+    {
+      path: '/orderShow',
+      name: 'OrderShow',
+      component: OrderShow
     }
   ]
 })
