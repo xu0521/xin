@@ -22,7 +22,7 @@ public class OrderController {
 
     @PostMapping("/checkout")
     public Long checkout(@RequestBody OrderCheckoutInDTO orderCheckoutInDTO,
-                            @RequestAttribute Integer customerId) {
+                         @RequestAttribute Integer customerId) {
         Long orderId = orderService.createOut(orderCheckoutInDTO, customerId);
 
         return orderId;
@@ -32,7 +32,7 @@ public class OrderController {
     @GetMapping("/getList")
     public PageInfo<Order> getList(@RequestAttribute Integer customerId,
                                    @RequestParam(defaultValue = "1") Integer pageNum) {
-        PageHelper.startPage(pageNum,5);
+        PageHelper.startPage(pageNum, 5);
         List<Order> orders = orderService.selectOrderByCustomer(customerId);
         PageInfo<Order> pageInfo = new PageInfo<>(orders);
         return pageInfo;
@@ -40,7 +40,8 @@ public class OrderController {
 
     @GetMapping("/getById")
     public OrderShowOutDTO getById(@RequestParam Long orderId) {
-        return null;
+        OrderShowOutDTO orderShowOutDTO = orderService.getById(orderId);
+        return orderShowOutDTO;
     }
 
 

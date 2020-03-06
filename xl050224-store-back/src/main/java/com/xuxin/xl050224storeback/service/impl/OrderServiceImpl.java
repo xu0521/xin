@@ -3,12 +3,12 @@ package com.xuxin.xl050224storeback.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.xuxin.xl050224storeback.dto.in.OrderCheckoutInDTO;
 import com.xuxin.xl050224storeback.dto.in.OrderProductInDTO;
-import com.xuxin.xl050224storeback.entity.Address;
-import com.xuxin.xl050224storeback.entity.Order;
-import com.xuxin.xl050224storeback.entity.OrderDetail;
-import com.xuxin.xl050224storeback.entity.Product;
+import com.xuxin.xl050224storeback.dto.out.OrderHistoryListOutDTO;
+import com.xuxin.xl050224storeback.dto.out.OrderShowOutDTO;
+import com.xuxin.xl050224storeback.entity.*;
 import com.xuxin.xl050224storeback.enumeration.OrderStatus;
 import com.xuxin.xl050224storeback.mapper.OrderDetailMapper;
+import com.xuxin.xl050224storeback.mapper.OrderHistoryMapper;
 import com.xuxin.xl050224storeback.mapper.OrderMapper;
 import com.xuxin.xl050224storeback.service.AddressService;
 import com.xuxin.xl050224storeback.service.OrderService;
@@ -36,6 +36,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private AddressService addressService;
+
+    @Autowired
+    private OrderHistoryMapper orderHistoryMapper;
 
     @Override
     @Transactional
@@ -104,5 +107,43 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> selectOrderByCustomer(Integer customerId) {
         List<Order> orders = orderMapper.selectByCustomer(customerId);
         return orders;
+    }
+
+    @Override
+    public OrderShowOutDTO getById(Long orderId) {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        OrderDetail orderDetail = orderDetailMapper.selectByPrimaryKey(orderId);
+
+        OrderShowOutDTO orderShowOutDTO = new OrderShowOutDTO();
+        orderShowOutDTO.setOrderId(orderId);
+        orderShowOutDTO.setStatus(order.getStatus());
+        orderShowOutDTO.setTotalPrice(order.getTotalPrice());
+        orderShowOutDTO.setRewordPoints(order.getRewordPoints());
+        orderShowOutDTO.setCreateTimestamp(order.getCreateTime().getTime());
+        orderShowOutDTO.setUpdateTimestamp(order.getUpdateTime().getTime());
+
+        orderShowOutDTO.setShipAddress(orderDetail.getShipAddress());
+        orderShowOutDTO.setShipMethod(orderDetail.getShipMethod());
+        orderShowOutDTO.setShipPrice(orderDetail.getShipPrice());
+        orderShowOutDTO.setPayMethod(orderDetail.getPayMethod());
+        orderShowOutDTO.setInvoiceAddress(orderDetail.getInvoiceAddress());
+        orderShowOutDTO.setInvoicePrice(orderDetail.getInvoicePrice());
+        orderShowOutDTO.setComment(orderDetail.getComment());
+
+        List<OrderProductVO> orderProductVOS = JSON.parseArray(orderDetail.getOrderProducts(), OrderProductVO.class);
+        orderShowOutDTO.setOrderProduct(orderProductVOS);
+
+        List<OrderHistory> orderHistories = orderHistoryMapper.selectByOrderId(orderId);
+        List<OrderHistoryListOutDTO> orderHistoryListOutDTOS = orderHistories.stream().map(orderHistory -> {
+            OrderHistoryListOutDTO orderHistoryListOutDTO = new OrderHistoryListOutDTO();
+            orderHistoryListOutDTO.setTimestamp(orderHistory.getTime().getTime());
+            orderHistoryListOutDTO.setOrderStatus(orderHistory.getOrderStatus());
+            orderHistoryListOutDTO.setComment(orderHistory.getComment());
+            return orderHistoryListOutDTO;
+        }).collect(Collectors.toList());
+
+        orderShowOutDTO.setOrderHistory(orderHistoryListOutDTOS);
+
+        return orderShowOutDTO;
     }
 }

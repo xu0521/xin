@@ -24,6 +24,7 @@
       <include refid="Base_Column_List" />
       from xl_order
       where customer_id = #{customerId,jdbcType=BIGINT}
+      order by create_time desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from xl_order

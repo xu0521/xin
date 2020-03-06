@@ -1,18 +1,18 @@
 package com.xuxin.xl050224storeback.dto.out;
 
+import com.xuxin.xl050224storeback.vo.OrderProductVO;
+
 import java.util.List;
 
 public class OrderShowOutDTO {
 
     private Long orderId;
 
-    private Integer customerId;
-
-    private String customerName;
-
     private byte status;
 
     private double totalPrice;
+
+    private Integer rewordPoints;
 
     private Long createTimestamp;
 
@@ -32,7 +32,7 @@ public class OrderShowOutDTO {
 
     private String comment;
 
-    private List<OrderProductShowOutOUT> orderProduct;
+    private List<OrderProductVO> orderProduct;
 
     private List<OrderHistoryListOutDTO> orderHistory;
 
@@ -42,22 +42,6 @@ public class OrderShowOutDTO {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
-    }
-
-    public Integer getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getCustomerName() {
-        return customerName;
-    }
-
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
     }
 
     public byte getStatus() {
@@ -148,11 +132,11 @@ public class OrderShowOutDTO {
         this.comment = comment;
     }
 
-    public List<OrderProductShowOutOUT> getOrderProduct() {
+    public List<OrderProductVO> getOrderProduct() {
         return orderProduct;
     }
 
-    public void setOrderProduct(List<OrderProductShowOutOUT> orderProduct) {
+    public void setOrderProduct(List<OrderProductVO> orderProduct) {
         this.orderProduct = orderProduct;
     }
 
@@ -162,5 +146,13 @@ public class OrderShowOutDTO {
 
     public void setOrderHistory(List<OrderHistoryListOutDTO> orderHistory) {
         this.orderHistory = orderHistory;
+    }
+
+    public Integer getRewordPoints() {
+        return rewordPoints;
+    }
+
+    public void setRewordPoints(Integer rewordPoints) {
+        this.rewordPoints = rewordPoints;
     }
 }
