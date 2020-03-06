@@ -6,7 +6,16 @@
       </el-table-column>
       <el-table-column prop="productCode" label="商品代号"></el-table-column>
       <el-table-column prop="productName" label="商品名称"></el-table-column>
-      <el-table-column prop="unitPrice" label="单价"></el-table-column>
+      <el-table-column label="价格">
+            <template slot-scope="scope">
+              单价：{{scope.row.unitPrice}}
+              <br>
+              打折：{{scope.row.discount}}
+              <br>
+              折后价：
+              {{(scope.row.unitPrice * scope.row.discount).toFixed(2)}}
+            </template>
+          </el-table-column>
       <el-table-column  label="数量">
         <template slot-scope="scope">
           <el-input placeholder="请输入数量" v-model="scope.row.quantity" type="number" clearable style="width:180px"></el-input>
@@ -15,7 +24,7 @@
       </el-table-column>
       <el-table-column prop="totalPrice" label="总价">
         <template slot-scope="scope">
-          {{(scope.row.unitPrice * scope.row.quantity).toFixed(2)}}
+          {{(scope.row.unitPrice * scope.row.quantity * scope.row.discount).toFixed(2)}}
         </template>
       </el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
@@ -24,6 +33,7 @@
         </template>
       </el-table-column>
     </el-table>
+    总价：{{totablePrice}}
   </div>
 </template>
 
@@ -34,6 +44,17 @@ export default {
     return {
       myShoppingCart: []
     };
+  },
+  computed:{
+    totablePrice(){
+      var suTotalPrices = this.myShoppingCart.map(p => {
+        return p.unitPrice * p.discount * p.quantity;
+      })
+      var totablePrice = suTotalPrices.reduce((a, b) => a + b, 0);
+      var totablePriceStr = totablePrice.toFixed(2);
+      totablePrice = parseFloat(totablePriceStr);
+      return totablePrice;
+    }
   },
   methods: {
     handleDelete(index, row) {

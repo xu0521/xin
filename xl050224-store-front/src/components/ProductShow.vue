@@ -58,6 +58,7 @@ export default {
         productName: this.productShow.productName,
         mainPicUrl: this.productShow.minaPicUrl,
         unitPrice: this.productShow.price,
+        discount:this.productShow.discount,
         quantity: this.quantity
         
       }    
@@ -74,7 +75,8 @@ export default {
           productCode: this.productShow.productCode,
           productName: this.productShow.productName,
           mainPicUrl: this.productShow.minaPicUrl,
-          unitPrice: this.productShow.price,
+          unitPrice: this.productShow.price,      
+          discount:this.productShow.discount,
           quantity: this.quantity
         } 
         this.myShoppingCart.push(carProduct)
