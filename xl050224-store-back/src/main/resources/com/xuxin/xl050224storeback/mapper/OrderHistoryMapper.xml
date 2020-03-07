@@ -19,11 +19,11 @@
     where order_history_id = #{orderHistoryId,jdbcType=BIGINT}
   </select>
   <select id="selectByOrderId" resultMap="BaseResultMap">
-    *       select
-    *       <include refid="Base_Column_List" />
-    *       from xl_order_history
-    *       where order_id = #{orderId,jdbcType=BIGINT}
-    *     </select>
+    select
+    <include refid="Base_Column_List" />
+    from xl_order_history
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from xl_order_history
     where order_history_id = #{orderHistoryId,jdbcType=BIGINT}
