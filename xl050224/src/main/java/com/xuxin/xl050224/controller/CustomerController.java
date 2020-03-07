@@ -69,7 +69,10 @@ public class CustomerController {
         customerShowOutDTO.setAvatarUrl(customer.getAvatarUrl());
 
         Address addressById = addressService.getById(customer.getDefaultAddressId());
-        customerShowOutDTO.setDefaultAddress(addressById.getContent());
+        if(addressById != null){
+            customerShowOutDTO.setDefaultAddress(addressById.getContent());
+        }
+
 
         return customerShowOutDTO;
     }
