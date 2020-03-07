@@ -1,5 +1,7 @@
 package com.xuxin.xl050224.dto.out;
 
+import com.xuxin.xl050224.vo.OrderProductVO;
+
 import java.util.List;
 
 public class OrderShowOutDTO {
@@ -13,6 +15,8 @@ public class OrderShowOutDTO {
     private byte status;
 
     private double totalPrice;
+
+    private Integer rewordPoints;
 
     private Long createTimestamp;
 
@@ -32,7 +36,7 @@ public class OrderShowOutDTO {
 
     private String comment;
 
-    private List<OrderProductShowOutOUT> orderProduct;
+    private List<OrderProductVO> orderProduct;
 
     public Long getOrderId() {
         return orderId;
@@ -146,11 +150,19 @@ public class OrderShowOutDTO {
         this.comment = comment;
     }
 
-    public List<OrderProductShowOutOUT> getOrderProduct() {
+    public List<OrderProductVO> getOrderProduct() {
         return orderProduct;
     }
 
-    public void setOrderProduct(List<OrderProductShowOutOUT> orderProduct) {
+    public void setOrderProduct(List<OrderProductVO> orderProduct) {
         this.orderProduct = orderProduct;
+    }
+
+    public Integer getRewordPoints() {
+        return rewordPoints;
+    }
+
+    public void setRewordPoints(Integer rewordPoints) {
+        this.rewordPoints = rewordPoints;
     }
 }
