@@ -3,7 +3,7 @@
 <mapper namespace="com.xuxin.xl050224storeback.mapper.OrderHistoryMapper">
   <resultMap id="BaseResultMap" type="com.xuxin.xl050224storeback.entity.OrderHistory">
     <id column="order_history_id" jdbcType="BIGINT" property="orderHistoryId" />
-    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="order_status" jdbcType="TINYINT" property="orderStatus" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
@@ -18,13 +18,13 @@
     from xl_order_history
     where order_history_id = #{orderHistoryId,jdbcType=BIGINT}
   </select>
-    <select id="selectByOrderId" resultMap="BaseResultMap">
-      select
-      <include refid="Base_Column_List" />
-      from xl_order_history
-      where order_id = #{orderId,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectByOrderId" resultMap="BaseResultMap">
+    *       select
+    *       <include refid="Base_Column_List" />
+    *       from xl_order_history
+    *       where order_id = #{orderId,jdbcType=BIGINT}
+    *     </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from xl_order_history
     where order_history_id = #{orderHistoryId,jdbcType=BIGINT}
   </delete>
@@ -32,7 +32,7 @@
     insert into xl_order_history (order_history_id, order_id, time, 
       order_status, comment, customer_notified
       )
-    values (#{orderHistoryId,jdbcType=BIGINT}, #{orderId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, 
+    values (#{orderHistoryId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{time,jdbcType=TIMESTAMP}, 
       #{orderStatus,jdbcType=TINYINT}, #{comment,jdbcType=VARCHAR}, #{customerNotified,jdbcType=BIT}
       )
   </insert>
@@ -63,7 +63,7 @@
         #{orderHistoryId,jdbcType=BIGINT},
       </if>
       <if test="orderId != null">
-        #{orderId,jdbcType=INTEGER},
+        #{orderId,jdbcType=BIGINT},
       </if>
       <if test="time != null">
         #{time,jdbcType=TIMESTAMP},
@@ -83,7 +83,7 @@
     update xl_order_history
     <set>
       <if test="orderId != null">
-        order_id = #{orderId,jdbcType=INTEGER},
+        order_id = #{orderId,jdbcType=BIGINT},
       </if>
       <if test="time != null">
         time = #{time,jdbcType=TIMESTAMP},
@@ -102,7 +102,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xuxin.xl050224storeback.entity.OrderHistory">
     update xl_order_history
-    set order_id = #{orderId,jdbcType=INTEGER},
+    set order_id = #{orderId,jdbcType=BIGINT},
       time = #{time,jdbcType=TIMESTAMP},
       order_status = #{orderStatus,jdbcType=TINYINT},
       comment = #{comment,jdbcType=VARCHAR},
