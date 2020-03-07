@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xuxin.xl050224.dto.in.CustomerCreateInDTO;
 import com.xuxin.xl050224.dto.in.CustomerSearchInDTO;
+import com.xuxin.xl050224.dto.in.CustomerSetStatusInDTO;
 import com.xuxin.xl050224.dto.in.CustomerUpdateInDTO;
 import com.xuxin.xl050224.dto.out.CustomerListOutDTO;
 import com.xuxin.xl050224.dto.out.CustomerShowOutDTO;
@@ -82,9 +83,9 @@ public class CustomerController {
 
     }
 
-    @PostMapping("/disable")
-    public void disable(@RequestParam Integer customerId){
-
+    @PostMapping("/setStatus")
+    public void setStatus(@RequestBody CustomerSetStatusInDTO customerSetStatusInDTO){
+        customerService.setStatus(customerSetStatusInDTO);
     }
 
 }
