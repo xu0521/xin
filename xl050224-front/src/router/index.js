@@ -11,6 +11,7 @@ import AdministratorUpdateProfile from '@/components/AdministratorUpdateProfile'
 import AdministratorCreate from '@/components/AdministratorCreate'
 import AdministratorUpdate from '@/components/AdministratorUpdate'
 import AdministratorIndex from '@/components/AdministratorIndex'
+import CustomerSearch from '@/components/CustomerSearch'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -62,6 +63,11 @@ export default new Router({
       path: '/administratorIndex',
       name: 'AdministratorIndex',
       component: AdministratorIndex
+    },
+    {
+      path: '/customerSearch',
+      name: 'CustomerSearch',
+      component: CustomerSearch
     }
   ]
 })
