@@ -12,6 +12,7 @@ import OrderIndex from '@/components/OrderIndex'
 import OrderShow from '@/components/OrderShow'
 import ReturnApply from '@/components/ReturnApply'
 import ReturnIndex from '@/components/ReturnIndex'
+import ReturnShow from '@/components/ReturnShow'
 
 
 Vue.use(Router)
@@ -69,6 +70,11 @@ export default new Router({
       path: '/returnIndex',
       name: 'ReturnIndex',
       component: ReturnIndex
+    },
+    {
+      path: '/returnShow',
+      name: 'ReturnShow',
+      component: ReturnShow
     }
   ]
 })
