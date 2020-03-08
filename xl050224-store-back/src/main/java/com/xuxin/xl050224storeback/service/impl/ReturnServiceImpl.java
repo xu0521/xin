@@ -6,6 +6,8 @@ import com.xuxin.xl050224storeback.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ReturnServiceImpl implements ReturnService {
 
@@ -17,5 +19,11 @@ public class ReturnServiceImpl implements ReturnService {
         returnMapper.insertSelective(aReturn);
         Integer returnId = aReturn.getReturnId();
         return returnId;
+    }
+
+    @Override
+    public List<Return> getByCustomerId(Integer customerId) {
+        List<Return> returns = returnMapper.selectReturnByCustomerId(customerId);
+        return returns;
     }
 }

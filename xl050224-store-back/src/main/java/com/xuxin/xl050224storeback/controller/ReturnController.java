@@ -1,6 +1,7 @@
 package com.xuxin.xl050224storeback.controller;
 
 
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.xuxin.xl050224storeback.dto.in.ReturnApplyInDTO;
 import com.xuxin.xl050224storeback.dto.out.ReturnListOutDTO;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/return")
@@ -49,7 +52,20 @@ public class ReturnController {
     @GetMapping("/getList")
     public PageInfo<ReturnListOutDTO> getList(@RequestAttribute Integer customerId,
                                              @RequestParam(defaultValue = "1") Integer pageNum){
-        return null;
+        PageHelper.startPage(pageNum,5);
+        List<Return> returns = returnService.getByCustomerId(customerId);
+        List<ReturnListOutDTO> returnListOutDTOS = returns.stream().map(aReturn -> {
+            ReturnListOutDTO returnListOutDTO = new ReturnListOutDTO();
+            returnListOutDTO.setOrderId(aReturn.getOrderId());
+            returnListOutDTO.setReturnId(aReturn.getReturnId());
+            returnListOutDTO.setCustomerId(aReturn.getCustomerId());
+            returnListOutDTO.setCustomerName(aReturn.getCustomerName());
+            returnListOutDTO.setCreateTimestamp(aReturn.getCreateTime().getTime());
+            returnListOutDTO.setStatus(aReturn.getStatus());
+            return returnListOutDTO;
+        }).collect(Collectors.toList());
+        PageInfo<ReturnListOutDTO> pageInfo = new PageInfo<>(returnListOutDTOS);
+        return pageInfo;
     }
 
 
