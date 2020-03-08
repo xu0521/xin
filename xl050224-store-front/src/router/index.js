@@ -10,6 +10,7 @@ import OrderCheckout from '@/components/OrderCheckout'
 import CustomerLogin from '@/components/CustomerLogin'
 import OrderIndex from '@/components/OrderIndex'
 import OrderShow from '@/components/OrderShow'
+import ReturnApply from '@/components/ReturnApply'
 
 
 Vue.use(Router)
@@ -57,6 +58,11 @@ export default new Router({
       path: '/orderShow',
       name: 'OrderShow',
       component: OrderShow
+    },
+    {
+      path: '/returnApply',
+      name: 'ReturnApply',
+      component: ReturnApply
     }
   ]
 })
