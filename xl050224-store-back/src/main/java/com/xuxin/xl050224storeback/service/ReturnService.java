@@ -10,4 +10,6 @@ public interface ReturnService {
 
     List<Return> getByCustomerId(Integer customerId);
 
+    Return getById(Integer returnId);
+
 }

@@ -1,5 +1,7 @@
 package com.xuxin.xl050224storeback.dto.out;
 
+import java.util.List;
+
 public class ReturnShowOutDTO {
 
     private Integer returnId;
@@ -35,6 +37,8 @@ public class ReturnShowOutDTO {
     private Long createTimestamp;
 
     private Long updateTimestamp;
+
+    private List<ReturnHistoryListOutDTO> returnHistories;
 
 
     public Integer getReturnId() {
@@ -171,5 +175,13 @@ public class ReturnShowOutDTO {
 
     public void setUpdateTimestamp(Long updateTimestamp) {
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public List<ReturnHistoryListOutDTO> getReturnHistories() {
+        return returnHistories;
+    }
+
+    public void setReturnHistories(List<ReturnHistoryListOutDTO> returnHistories) {
+        this.returnHistories = returnHistories;
     }
 }

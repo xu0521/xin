@@ -26,4 +26,10 @@ public class ReturnServiceImpl implements ReturnService {
         List<Return> returns = returnMapper.selectReturnByCustomerId(customerId);
         return returns;
     }
+
+    @Override
+    public Return getById(Integer returnId) {
+        Return aReturn = returnMapper.selectByPrimaryKey(returnId);
+        return aReturn;
+    }
 }
