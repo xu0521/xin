@@ -11,6 +11,7 @@ import CustomerLogin from '@/components/CustomerLogin'
 import OrderIndex from '@/components/OrderIndex'
 import OrderShow from '@/components/OrderShow'
 import ReturnApply from '@/components/ReturnApply'
+import ReturnIndex from '@/components/ReturnIndex'
 
 
 Vue.use(Router)
@@ -63,6 +64,11 @@ export default new Router({
       path: '/returnApply',
       name: 'ReturnApply',
       component: ReturnApply
+    },
+    {
+      path: '/returnIndex',
+      name: 'ReturnIndex',
+      component: ReturnIndex
     }
   ]
 })
