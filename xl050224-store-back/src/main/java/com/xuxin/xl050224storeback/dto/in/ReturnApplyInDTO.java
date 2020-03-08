@@ -2,7 +2,7 @@ package com.xuxin.xl050224storeback.dto.in;
 
 public class ReturnApplyInDTO {
 
-    private Integer orderId;
+    private Long orderId;
 
     private Long orderTimestamp;
 
@@ -24,11 +24,11 @@ public class ReturnApplyInDTO {
 
     private String comment;
 
-    public Integer getOrderId() {
+    public Long getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Integer orderId) {
+    public void setOrderId(Long orderId) {
         this.orderId = orderId;
     }
 

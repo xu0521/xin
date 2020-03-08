@@ -5,15 +5,45 @@ import com.github.pagehelper.PageInfo;
 import com.xuxin.xl050224storeback.dto.in.ReturnApplyInDTO;
 import com.xuxin.xl050224storeback.dto.out.ReturnListOutDTO;
 import com.xuxin.xl050224storeback.dto.out.ReturnShowOutDTO;
+import com.xuxin.xl050224storeback.entity.Return;
+import com.xuxin.xl050224storeback.enumeration.ReturnStatus;
+import com.xuxin.xl050224storeback.service.ReturnService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 @RestController
 @RequestMapping("/return")
 public class ReturnController {
 
+    @Autowired
+    private ReturnService returnService;
+
     @PostMapping("/apply")
-    public Integer apply(@RequestBody ReturnApplyInDTO returnApplyInDTO){
-        return null;
+    public Integer apply(@RequestBody ReturnApplyInDTO returnApplyInDTO,
+                         @RequestAttribute Integer customerId){
+        Return aReturn = new Return();
+        aReturn.setOrderId(returnApplyInDTO.getOrderId());
+        aReturn.setOrderTime(new Date(returnApplyInDTO.getOrderTimestamp()));
+        aReturn.setCustomerId(customerId);
+        aReturn.setCustomerName(returnApplyInDTO.getCustomerName());
+        aReturn.setMobile(returnApplyInDTO.getMobile());
+        aReturn.setEmail(returnApplyInDTO.getEmail());
+        aReturn.setStatus((byte) ReturnStatus.ToProcess.ordinal());
+        aReturn.setProductName(returnApplyInDTO.getProductName());
+        aReturn.setProductCode(returnApplyInDTO.getProductCode());
+        aReturn.setQuantity(returnApplyInDTO.getQuantity());
+        aReturn.setReason(returnApplyInDTO.getReason());
+        aReturn.setOpened(returnApplyInDTO.getOpened());
+        aReturn.setComment(returnApplyInDTO.getComment());
+        Date date = new Date();
+        aReturn.setCreateTime(date);
+        aReturn.setUpdateTime(date);
+        returnService.create(aReturn);
+        Integer returnId = aReturn.getReturnId();
+
+        return returnId;
     }
 
     @GetMapping("/getList")
