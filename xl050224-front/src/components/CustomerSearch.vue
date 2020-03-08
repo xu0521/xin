@@ -5,16 +5,33 @@
       <el-table-column prop="realName" label="客户姓名"></el-table-column>
       <el-table-column prop="mobile" label="手机"></el-table-column>
       <el-table-column prop="email" label="邮箱"></el-table-column>
-      <el-table-column prop="status" label="状态"></el-table-column>
+      <el-table-column prop="status" label="状态">
+        <template slot-scope="scope">
+          <el-select v-model="scope.row.status" placeholder="请选择状态">
+            <el-option
+              v-for="item in stautses"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            ></el-option>
+          </el-select>
+        </template>
+      </el-table-column>
       <el-table-column prop="createTimestamp" label="注册日期"></el-table-column>
       <el-table-column fixed="right" label="操作" width="180">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-button type="text" size="small">编辑</el-button>
+          <el-button @click="handleUpdateStatus(scope.row)" type="text" size="small">更新状态</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination :page-size="pageSize" :pager-count="11" layout="prev, pager, next" :total="total" @current-change="currentChange"></el-pagination>
+    <el-pagination
+      :page-size="pageSize"
+      :pager-count="11"
+      layout="prev, pager, next"
+      :total="total"
+      @current-change="currentChange"
+    ></el-pagination>
   </div>
 </template>
 
@@ -25,8 +42,22 @@ export default {
   data() {
     return {
       customerSearch: [],
-      pageSize:5,
-      total:0
+      pageSize: 5,
+      total: 0,
+      stautses: [
+        {
+          value: 0,
+          label: "禁用"
+        },
+        {
+          value: 1,
+          label: "启用"
+        },
+        {
+          value: 2,
+          label: "不安全"
+        }
+      ]
     };
   },
   methods: {
@@ -42,11 +73,19 @@ export default {
         this.pageSize = res.data.pageSize;
       });
     },
-    currentChange(pageNum){
-      this.getCustomerList(pageNum)
+    currentChange(pageNum) {
+      this.getCustomerList(pageNum);
     },
-    handleClick(row){
-      this.$router.push({name:"CustomerShow",query:row})
+    handleClick(row) {
+      this.$router.push({ name: "CustomerShow", query: row });
+    },
+    handleUpdateStatus(row){
+      this.getUpdateStatus(row.customerId,row.status);
+    },
+    getUpdateStatus(customerId,status){
+      axios.post("/customer/setStatus",{customerId:customerId,status:status}).then(res=>{
+        this.$message.success('状态更新成功');
+      })
     }
   },
   mounted() {
