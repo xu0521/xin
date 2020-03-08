@@ -31,7 +31,12 @@
     from xl_return
     where return_id = #{returnId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByReturn" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from xl_return
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from xl_return
     where return_id = #{returnId,jdbcType=INTEGER}
   </delete>
