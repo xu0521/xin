@@ -77,8 +77,8 @@ export default {
     }
   },
   mounted() {
-    if(this.$route.params){
-      this.getAdministratorUpdate(this.$route.params.administratorId);
+    if(this.$route.query){
+      this.getAdministratorUpdate(this.$route.query.administratorId);
     }
     
   }

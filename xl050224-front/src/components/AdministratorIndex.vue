@@ -65,7 +65,7 @@ export default {
     },
     //修改
     handleClick(row) {
-      this.$router.push({ name: "AdministratorUpdate", params: row });
+      this.$router.push({ name: "AdministratorUpdate", query: row });
     },
     //单删
     handleDelete(row) {

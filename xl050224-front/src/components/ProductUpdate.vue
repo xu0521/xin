@@ -186,8 +186,8 @@ export default {
     }
   },
   mounted() {
-    if(this.$route.params){
-      this.getProductById(this.$route.params.productId);
+    if(this.$route.query){
+      this.getProductById(this.$route.query.productId);
     }
   }
 };

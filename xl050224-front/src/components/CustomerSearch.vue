@@ -44,6 +44,9 @@ export default {
     },
     currentChange(pageNum){
       this.getCustomerList(pageNum)
+    },
+    handleClick(row){
+      this.$router.push({name:"CustomerShow",query:row})
     }
   },
   mounted() {

@@ -12,6 +12,7 @@ import AdministratorCreate from '@/components/AdministratorCreate'
 import AdministratorUpdate from '@/components/AdministratorUpdate'
 import AdministratorIndex from '@/components/AdministratorIndex'
 import CustomerSearch from '@/components/CustomerSearch'
+import CustomerShow from '@/components/CustomerShow'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -68,6 +69,11 @@ export default new Router({
       path: '/customerSearch',
       name: 'CustomerSearch',
       component: CustomerSearch
+    },
+    {
+      path: '/customerShow',
+      name: 'CustomerShow',
+      component: CustomerShow
     }
   ]
 })

@@ -64,7 +64,7 @@ export default {
       this.$router.push("/productCreate");
     },
     handleClick(row){
-      this.$router.push({name:"ProductUpdate" , params:row})
+      this.$router.push({name:"ProductUpdate" , query:row})
     }
   },
   mounted() {
