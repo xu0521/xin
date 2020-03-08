@@ -13,6 +13,8 @@ import AdministratorUpdate from '@/components/AdministratorUpdate'
 import AdministratorIndex from '@/components/AdministratorIndex'
 import CustomerSearch from '@/components/CustomerSearch'
 import CustomerShow from '@/components/CustomerShow'
+import AddressIndex from '@/components/AddressIndex'
+import AddressShow from '@/components/AddressShow'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -74,6 +76,16 @@ export default new Router({
       path: '/customerShow',
       name: 'CustomerShow',
       component: CustomerShow
+    },
+    {
+      path: '/addressIndex',
+      name: 'AddressIndex',
+      component: AddressIndex
+    },
+    {
+      path: '/addressShow',
+      name: 'AddressShow',
+      component: AddressShow
     }
   ]
 })
