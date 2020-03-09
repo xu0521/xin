@@ -37,7 +37,7 @@ public class ReturnHistoryServiceImpl implements ReturnHistoryService {
         aReturn.setReturnId(returnHistory.getReturnId());
         aReturn.setUpdateTime(new Date());
         returnService.update(aReturn);
-        
+
         return returnHistoryId;
     }
 }
