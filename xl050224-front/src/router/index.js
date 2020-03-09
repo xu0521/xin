@@ -17,6 +17,7 @@ import AddressIndex from '@/components/AddressIndex'
 import AddressShow from '@/components/AddressShow'
 import OrderSearch from '@/components/OrderSearch'
 import OrderShow from '@/components/OrderShow'
+import ReturnSearch from '@/components/ReturnSearch'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -98,6 +99,11 @@ export default new Router({
       path: '/orderShow',
       name: 'OrderShow',
       component: OrderShow
+    },
+    {
+      path: '/returnSearch',
+      name: 'ReturnSearch',
+      component: ReturnSearch
     }
   ]
 })
