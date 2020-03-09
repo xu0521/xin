@@ -6,7 +6,7 @@ public class ReturnHistoryCreateInDTO {
 
     private byte returnStatus;
 
-    private boolean customerNotified;
+    private Boolean customerNotified;
 
     private String comment;
 
@@ -26,11 +26,11 @@ public class ReturnHistoryCreateInDTO {
         this.returnStatus = returnStatus;
     }
 
-    public boolean isCustomerNotified() {
+    public Boolean getCustomerNotified() {
         return customerNotified;
     }
 
-    public void setCustomerNotified(boolean customerNotified) {
+    public void setCustomerNotified(Boolean customerNotified) {
         this.customerNotified = customerNotified;
     }
 

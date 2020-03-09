@@ -2,7 +2,7 @@ package com.xuxin.xl050224.dto.out;
 
 public class ReturnHistoryListOutDTO {
 
-    private Integer returnHistoryId;
+    private Long returnHistoryId;
 
     private Long timestamp;
 
@@ -12,11 +12,11 @@ public class ReturnHistoryListOutDTO {
 
     private boolean customerNotified;
 
-    public Integer getReturnHistoryId() {
+    public Long getReturnHistoryId() {
         return returnHistoryId;
     }
 
-    public void setReturnHistoryId(Integer returnHistoryId) {
+    public void setReturnHistoryId(Long returnHistoryId) {
         this.returnHistoryId = returnHistoryId;
     }
 

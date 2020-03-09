@@ -18,7 +18,13 @@
     from xl_return_history
     where return_history_id = #{returnHistoryId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByReturnId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from xl_return_history
+      where return_id = #{returnId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from xl_return_history
     where return_history_id = #{returnHistoryId,jdbcType=BIGINT}
   </delete>
@@ -30,12 +36,9 @@
       #{returnStatus,jdbcType=TINYINT}, #{comment,jdbcType=VARCHAR}, #{customerNotified,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.xuxin.xl050224.entity.ReturnHistory">
+  <insert id="insertSelective" parameterType="com.xuxin.xl050224.entity.ReturnHistory" useGeneratedKeys="true" keyProperty="returnHistoryId">
     insert into xl_return_history
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="returnHistoryId != null">
-        return_history_id,
-      </if>
       <if test="returnId != null">
         return_id,
       </if>
@@ -53,9 +56,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="returnHistoryId != null">
-        #{returnHistoryId,jdbcType=BIGINT},
-      </if>
       <if test="returnId != null">
         #{returnId,jdbcType=INTEGER},
       </if>
