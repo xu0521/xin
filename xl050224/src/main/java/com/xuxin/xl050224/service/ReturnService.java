@@ -9,4 +9,8 @@ public interface ReturnService {
 
     List<Return> search(ReturnSearchInDTO returnSearchInDTO);
 
+    Return getById(Integer returnId);
+
+    void update(Return aReturn);
+
 }

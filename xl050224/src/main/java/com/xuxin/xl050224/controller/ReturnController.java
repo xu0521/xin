@@ -11,6 +11,7 @@ import com.xuxin.xl050224.service.ReturnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,11 +47,37 @@ public class ReturnController {
 
     @GetMapping("/getById")
     public ReturnShowOutDTO getById(@RequestParam Integer returnId){
-        return null;
+        Return aReturn = returnService.getById(returnId);
+        ReturnShowOutDTO returnShowOutDTO = new ReturnShowOutDTO();
+        returnShowOutDTO.setReturnId(aReturn.getReturnId());
+        returnShowOutDTO.setCustomerId(aReturn.getCustomerId());
+        returnShowOutDTO.setCustomerName(aReturn.getCustomerName());
+        returnShowOutDTO.setOrderId(aReturn.getOrderId());
+        returnShowOutDTO.setOrderTimestamp(aReturn.getCreateTime().getTime());
+        returnShowOutDTO.setCreateTimestamp(aReturn.getCreateTime().getTime());
+        returnShowOutDTO.setUpdateTimestamp(aReturn.getUpdateTime().getTime());
+        returnShowOutDTO.setEmail(aReturn.getEmail());
+        returnShowOutDTO.setMobile(aReturn.getMobile());
+        returnShowOutDTO.setAction(aReturn.getAction());
+        returnShowOutDTO.setComment(aReturn.getComment());
+        returnShowOutDTO.setOpened(aReturn.getOpened());
+        returnShowOutDTO.setStatus(aReturn.getStatus());
+        returnShowOutDTO.setProductCode(aReturn.getProductCode());
+        returnShowOutDTO.setProductName(aReturn.getProductName());
+        returnShowOutDTO.setQuantity(aReturn.getQuantity());
+        returnShowOutDTO.setReason(aReturn.getReason());
+
+
+        return returnShowOutDTO;
     }
 
     @PostMapping("/update")
     public void update(@RequestBody ReturnUpdateInDTO returnUpdateInDTO){
+        Return aReturn = new Return();
+        aReturn.setReturnId(returnUpdateInDTO.getReturnId());
+        aReturn.setAction(returnUpdateInDTO.getAction());
+        aReturn.setUpdateTime(new Date());
+        returnService.update(aReturn);
 
     }
 

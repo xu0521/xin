@@ -20,4 +20,15 @@ public class ReturnServiceImpl implements ReturnService {
         List<Return> returns = returnMapper.selectByReturn(returnSearchInDTO);
         return returns;
     }
+
+    @Override
+    public Return getById(Integer returnId) {
+        Return aReturn = returnMapper.selectByPrimaryKey(returnId);
+        return aReturn;
+    }
+
+    @Override
+    public void update(Return aReturn) {
+        returnMapper.updateByPrimaryKeySelective(aReturn);
+    }
 }
