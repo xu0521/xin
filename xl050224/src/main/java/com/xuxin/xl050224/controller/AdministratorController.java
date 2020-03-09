@@ -14,10 +14,17 @@ import com.xuxin.xl050224.exception.ClientException;
 import com.xuxin.xl050224.service.AdministratorService;
 import com.xuxin.xl050224.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.bind.DatatypeConverter;
+import java.security.SecureRandom;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
     @RequestMapping("/administrator")
@@ -28,6 +35,17 @@ public class AdministratorController {
 
     @Autowired
     private JWTUtil jwtUtil;
+
+    @Autowired
+    private SecureRandom secureRandom;
+
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+
+    private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
 
     //登录
     @GetMapping("/login")
@@ -73,6 +91,7 @@ public class AdministratorController {
         administratorService.updateProfile(administrator);
     }
 
+    //修改密码
     @PostMapping("/changePwd")
     public void changePwd(@RequestBody AdministratorChangePwdInDTO administratorChangePwdInDTO,
                           @RequestAttribute Integer administratorId){
@@ -81,8 +100,16 @@ public class AdministratorController {
 
     //根据邮件查找密码
     @GetMapping("/getPwdResetCode")
-    public String getPedRestCode(@RequestParam String email){
-        return null;
+    public void getPedRestCode(@RequestParam String email){
+        byte[] bytes = secureRandom.generateSeed(3);
+        String hex = DatatypeConverter.printHexBinary(bytes);
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom(fromEmail);
+        mailMessage.setTo(email);
+        mailMessage.setSubject("电商管理员验证密码");
+        mailMessage.setText(hex);
+        mailSender.send(mailMessage);
+        emailPwdResetCodeMap.put(email,hex);
     }
 
     //重置密码
