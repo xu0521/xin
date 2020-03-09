@@ -44,6 +44,9 @@ public class ReturnHistoryController {
         Boolean customerNotified = returnHistoryCreateInDTO.getCustomerNotified();
         returnHistory.setCustomerNotified(customerNotified);
         Long returnHistoryId = returnHistoryService.create(returnHistory);
+        if (customerNotified != null && customerNotified){
+
+        }
         return returnHistoryId;
     }
 
