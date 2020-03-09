@@ -71,7 +71,7 @@ public class ReturnController {
         return returnShowOutDTO;
     }
 
-    @PostMapping("/update")
+    @PostMapping("/updateAction")
     public void update(@RequestBody ReturnUpdateInDTO returnUpdateInDTO){
         Return aReturn = new Return();
         aReturn.setReturnId(returnUpdateInDTO.getReturnId());
