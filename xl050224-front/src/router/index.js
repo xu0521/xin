@@ -19,6 +19,7 @@ import OrderSearch from '@/components/OrderSearch'
 import OrderShow from '@/components/OrderShow'
 import ReturnSearch from '@/components/ReturnSearch'
 import ReturnShow from '@/components/ReturnShow'
+import ReturnHistoryIndex from '@/components/ReturnHistoryIndex'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -110,6 +111,11 @@ export default new Router({
       path: '/returnShow',
       name: 'ReturnShow',
       component: ReturnShow
+    },
+    {
+      path: '/returnHistoryIndex',
+      name: 'ReturnHistoryIndex',
+      component: ReturnHistoryIndex
     }
   ]
 })
