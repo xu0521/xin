@@ -13,4 +13,6 @@ public interface CustomerService {
 
     void updateProfile(Customer customer);
 
+    Customer getByEmail(String email);
+
 }
