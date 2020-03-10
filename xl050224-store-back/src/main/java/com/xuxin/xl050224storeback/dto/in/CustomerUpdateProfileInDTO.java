@@ -6,6 +6,8 @@ public class CustomerUpdateProfileInDTO {
 
     private String email;
 
+    private String mobile;
+
     private String avatarUrl;
 
 
@@ -33,4 +35,11 @@ public class CustomerUpdateProfileInDTO {
         this.avatarUrl = avatarUrl;
     }
 
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 }

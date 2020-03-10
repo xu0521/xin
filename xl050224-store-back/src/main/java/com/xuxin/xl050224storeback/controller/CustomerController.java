@@ -63,8 +63,15 @@ public class CustomerController {
 
     //修改注册信息
     @PostMapping("/updateProfile")
-    public  void updateProfile(@RequestBody CustomerUpdateProfileInDTO customerUpdateProfileInDTO){
-
+    public  void updateProfile(@RequestBody CustomerUpdateProfileInDTO customerUpdateProfileInDTO,
+                               @RequestAttribute Integer customerId){
+        Customer customer = new Customer();
+        customer.setCustomerId(customerId);
+        customer.setRealName(customerUpdateProfileInDTO.getRealName());
+        customer.setMobile(customerUpdateProfileInDTO.getMobile());
+        customer.setEmail(customerUpdateProfileInDTO.getEmail());
+        customer.setAvatarUrl(customerUpdateProfileInDTO.getAvatarUrl());
+        customerService.updateProfile(customer);
     }
 
     @PostMapping("/changePwd")
