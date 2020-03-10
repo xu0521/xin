@@ -60,7 +60,7 @@ public class AdministratorController {
             AdministratorLoginOutDTO administratorLoginOutDTO = jwtUtil.issueToken(byUsername);
             return administratorLoginOutDTO;
         }else{
-            throw new ClientException(ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRCODE, ClientExceptionConstant.ADNINISTRATOR_PASSWORD_INVALID_ERRMSG);
+            throw new ClientException(ClientExceptionConstant.TOKEN_INVALID_ERRCODE, ClientExceptionConstant.TOKEN_INVALID_ERRMSG);
         }
     }
 
@@ -114,7 +114,33 @@ public class AdministratorController {
 
     //重置密码
     @PostMapping("/resetPwd")
-    public void resetPwd(@RequestBody AdministratorResetPedInDTO administratorResetPedInDTO){
+    public void resetPwd(@RequestBody AdministratorResetPedInDTO administratorResetPedInDTO) throws ClientException {
+        String email = administratorResetPedInDTO.getEmail();
+        String innerResetCode = emailPwdResetCodeMap.get(email);
+        if (email == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
+        }
+        if (innerResetCode == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRMSG);
+        }
+        String outerResetCode = administratorResetPedInDTO.getResetCode();
+        if (outerResetCode == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_PWDRESET_OUTER_RESETCODE_NONE_ERRMSG);
+        }
+        if (!outerResetCode.equalsIgnoreCase(innerResetCode)){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_PWDRESET_RESETCODE_INVALID_ERRMSG);
+        }
+        Administrator administrator = administratorService.getByEmail(email);
+        if (administrator == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
+        String newPed = administratorResetPedInDTO.getNewPed();
+        if (newPed == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_NEWPWD_NOT_EXIST_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_NEWPWD_NOT_EXIST_ERRMSG);
+        }
+        String bcrypHashString = BCrypt.withDefaults().hashToString(12,newPed.toCharArray());
+        administrator.setEncryptedPassword(bcrypHashString);
+        administratorService.update(administrator);
 
     }
 

@@ -31,8 +31,15 @@
     select
     <include refid="Base_Column_List" />
     from xl_administrator
+
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByEmail" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from xl_administrator
+      where email = #{email}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from xl_administrator
     where administrator_id = #{administratorId,jdbcType=INTEGER}
   </delete>

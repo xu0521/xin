@@ -22,5 +22,6 @@ public interface AdministratorService {
 
     List<Administrator> getList();
 
+    Administrator getByEmail(String email);
 
 }

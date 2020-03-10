@@ -58,4 +58,10 @@ public class AdministratorServiceImpl implements AdministratorService {
         List<Administrator> administrators = administratorMapper.getList();
         return administrators;
     }
+
+    @Override
+    public Administrator getByEmail(String email) {
+        Administrator administrator = administratorMapper.selectByEmail(email);
+        return administrator;
+    }
 }
