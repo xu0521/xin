@@ -25,7 +25,8 @@ public class CustomerController {
 
     @PostMapping("/register")
     public Integer register(@RequestBody CustomerRegisterInDTO customerRegisterInDTO){
-        return null;
+        Integer customerId = customerService.register(customerRegisterInDTO);
+        return customerId;
     }
 
     @GetMapping("/login")
