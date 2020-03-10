@@ -47,8 +47,18 @@ public class CustomerController {
 
     //查询注册信息
     @GetMapping("/getProfile")
-    public CustomerGetProfileOutDTO getProfile(Integer administratorId){
-        return null;
+    public CustomerGetProfileOutDTO getProfile(@RequestAttribute Integer customerId){
+        Customer customer   = customerService.getById(customerId);
+        CustomerGetProfileOutDTO customerGetProfileOutDTO = new CustomerGetProfileOutDTO();
+        customerGetProfileOutDTO.setCustomerId(customerId);
+        customerGetProfileOutDTO.setUsername(customer.getUsername());
+        customerGetProfileOutDTO.setRealName(customer.getRealName());
+        customerGetProfileOutDTO.setEmail(customer.getEmail());
+        customerGetProfileOutDTO.setEmailVerified(customer.getEmailVerified());
+        customerGetProfileOutDTO.setMobile(customer.getMobile());
+        customerGetProfileOutDTO.setMobileVerified(customer.getMobileVerified());
+
+        return customerGetProfileOutDTO;
     }
 
     //修改注册信息

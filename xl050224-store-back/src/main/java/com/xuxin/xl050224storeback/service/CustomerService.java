@@ -9,4 +9,6 @@ public interface CustomerService {
 
     Integer register(CustomerRegisterInDTO customerRegisterInDTO);
 
+    Customer getById(Integer customerId);
+
 }

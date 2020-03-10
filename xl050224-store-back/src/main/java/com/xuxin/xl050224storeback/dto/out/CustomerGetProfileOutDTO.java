@@ -10,11 +10,11 @@ public class CustomerGetProfileOutDTO {
 
     private String email;
 
-    private String  emailVerified;
+    private Boolean  emailVerified;
 
     private String mobile;
 
-    private String mobileVerified;
+    private Boolean mobileVerified;
 
     public Integer getCustomerId() {
         return customerId;
@@ -48,11 +48,11 @@ public class CustomerGetProfileOutDTO {
         this.email = email;
     }
 
-    public String getEmailVerified() {
+    public Boolean getEmailVerified() {
         return emailVerified;
     }
 
-    public void setEmailVerified(String emailVerified) {
+    public void setEmailVerified(Boolean emailVerified) {
         this.emailVerified = emailVerified;
     }
 
@@ -64,11 +64,11 @@ public class CustomerGetProfileOutDTO {
         this.mobile = mobile;
     }
 
-    public String getMobileVerified() {
+    public Boolean getMobileVerified() {
         return mobileVerified;
     }
 
-    public void setMobileVerified(String mobileVerified) {
+    public void setMobileVerified(Boolean mobileVerified) {
         this.mobileVerified = mobileVerified;
     }
 }

@@ -46,4 +46,10 @@ public class CustomerServiceImpl implements CustomerService {
         Integer customerId = customer.getCustomerId();
         return customerId;
     }
+
+    @Override
+    public Customer getById(Integer customerId) {
+        Customer customer = customerMapper.selectByPrimaryKey(customerId);
+        return customer;
+    }
 }
