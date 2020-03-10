@@ -2,6 +2,8 @@ package com.xuxin.xl050224storeback.dto.in;
 
 public class AddressUpdateInDTO {
 
+    private Integer addressId;
+
     private String receiverName;
 
     private String receiverMobile;
@@ -40,6 +42,14 @@ public class AddressUpdateInDTO {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public Integer getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
     }
 }
 
