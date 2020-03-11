@@ -20,6 +20,8 @@ import OrderShow from '@/components/OrderShow'
 import ReturnSearch from '@/components/ReturnSearch'
 import ReturnShow from '@/components/ReturnShow'
 import ReturnHistoryIndex from '@/components/ReturnHistoryIndex'
+import AdministratorForgetPwd from '@/components/AdministratorForgetPwd'
+import AdministratorResetPwd from '@/components/AdministratorResetPwd'
 
 Vue.use(Router)
 Vue.use(ElementUI);
@@ -116,6 +118,16 @@ export default new Router({
       path: '/returnHistoryIndex',
       name: 'ReturnHistoryIndex',
       component: ReturnHistoryIndex
+    },
+    {
+      path: '/administratorForgetPwd',
+      name: 'AdministratorForgetPwd',
+      component: AdministratorForgetPwd
+    },
+    {
+      path: '/administratorResetPwd',
+      name: 'AdministratorResetPwd',
+      component: AdministratorResetPwd
     }
   ]
 })
