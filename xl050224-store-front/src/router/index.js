@@ -16,6 +16,11 @@ import ReturnShow from '@/components/ReturnShow'
 import AddressCreate from '@/components/AddressCreate'
 import AddressIndex from '@/components/AddressIndex'
 import AddressUpdate from '@/components/AddressUpdate'
+import CustomerChangePwd from '@/components/CustomerChangePwd'
+import CustomerForgetPwd from '@/components/CustomerForgetPwd'
+import CustomerResetPwd from '@/components/CustomerResetPwd'
+import CustomerRegister from '@/components/CustomerRegister'
+import customerUpdateProfile from '@/components/customerUpdateProfile'
 
 
 Vue.use(Router)
@@ -93,6 +98,31 @@ export default new Router({
       path: '/addressUpdate',
       name: 'AddressUpdate',
       component: AddressUpdate
+    },
+    {
+      path: '/customerChangePwd',
+      name: 'CustomerChangePwd',
+      component: CustomerChangePwd
+    },
+    {
+      path: '/customerForgetPwd',
+      name: 'CustomerForgetPwd',
+      component: CustomerForgetPwd
+    },
+    {
+      path: '/customerResetPwd',
+      name: 'CustomerResetPwd',
+      component: CustomerResetPwd
+    },
+    {
+      path: '/customerRegister',
+      name: 'CustomerRegister',
+      component: CustomerRegister
+    },
+    {
+      path: '/customerUpdateProfile',
+      name: 'customerUpdateProfile',
+      component: customerUpdateProfile
     }
   ]
 })
