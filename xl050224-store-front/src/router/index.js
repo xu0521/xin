@@ -13,6 +13,9 @@ import OrderShow from '@/components/OrderShow'
 import ReturnApply from '@/components/ReturnApply'
 import ReturnIndex from '@/components/ReturnIndex'
 import ReturnShow from '@/components/ReturnShow'
+import AddressCreate from '@/components/AddressCreate'
+import AddressIndex from '@/components/AddressIndex'
+import AddressUpdate from '@/components/AddressUpdate'
 
 
 Vue.use(Router)
@@ -75,6 +78,21 @@ export default new Router({
       path: '/returnShow',
       name: 'ReturnShow',
       component: ReturnShow
+    },
+    {
+      path: '/addressCreate',
+      name: 'AddressCreate',
+      component: AddressCreate
+    },
+    {
+      path: '/addressIndex',
+      name: 'AddressIndex',
+      component: AddressIndex
+    },
+    {
+      path: '/addressUpdate',
+      name: 'AddressUpdate',
+      component: AddressUpdate
     }
   ]
 })
