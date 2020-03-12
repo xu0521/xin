@@ -1,7 +1,7 @@
 package com.xuxin.xl050224.mapper;
 
-import com.xuxin.xl050224.dto.in.ReturnSearchInDTO;
 import com.xuxin.xl050224.entity.Return;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,5 +20,10 @@ public interface ReturnMapper {
 
     int updateByPrimaryKey(Return record);
 
-    List<Return> selectByReturn(ReturnSearchInDTO returnSearchInDTO);
+    List<Return> selectByReturn(@Param("returnId") Integer returnId,
+                                @Param("customerName") String customerName,
+                                @Param("orderId") Long orderId,
+                                @Param("productCode") String productCode,
+                                @Param("productName") String productName,
+                                @Param("status") Byte status);
 }

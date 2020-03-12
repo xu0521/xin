@@ -17,7 +17,14 @@ public class ReturnServiceImpl implements ReturnService {
 
     @Override
     public List<Return> search(ReturnSearchInDTO returnSearchInDTO) {
-        List<Return> returns = returnMapper.selectByReturn(returnSearchInDTO);
+        List<Return> returns = returnMapper.selectByReturn(
+                returnSearchInDTO.getReturnId(),
+                returnSearchInDTO.getCustomerName(),
+                returnSearchInDTO.getOrderId(),
+                returnSearchInDTO.getProductCode(),
+                returnSearchInDTO.getProductName(),
+                returnSearchInDTO.getStatus()
+        );
         return returns;
     }
 

@@ -35,6 +35,27 @@
       select
       <include refid="Base_Column_List" />
       from xl_return
+      <where>
+        1=1
+        <if test="orderId != null and orderId != '' ">
+          and order_id = #{orderId}
+        </if>
+        <if test="returnId != null and returnId != '' ">
+          and return_id = #{returnId}
+        </if>
+        <if test="status != null and status != '' ">
+          and status = #{status}
+        </if>
+        <if test="productCode != null and productCode != '' ">
+          and product_code = #{productCode}
+        </if>
+        <if test="productName != null and productName != '' ">
+          and product_name like concat('%',#{productName},'%')
+        </if>
+        <if test="customerName != null and customerName != '' ">
+          and customer_name like concat('%',#{customerName},'%')
+        </if>
+      </where>
       order by create_time desc
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
