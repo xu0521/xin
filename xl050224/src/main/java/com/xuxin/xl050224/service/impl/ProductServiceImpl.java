@@ -99,7 +99,9 @@ public class ProductServiceImpl  implements ProductService {
     public List<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO) {
         List<ProductListOutDTO> productListOutDTOS =  productMapper.search(productSearchInDTO.getProductCode(),
                 productSearchInDTO.getStatus(),
-                productSearchInDTO.getStockQuantity());
+                productSearchInDTO.getStockQuantity(),
+                productSearchInDTO.getPrice(),
+                productSearchInDTO.getProductName());
         return productListOutDTOS;
     }
 

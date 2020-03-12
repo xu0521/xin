@@ -49,6 +49,12 @@
       <if test="stockQuantity != null and stockQuantity != '' ">
         and stock_quantity &lt;=  #{stockQuantity}
       </if>
+      <if test="price != null and price != '' ">
+      and price =  #{price}
+      </if>
+      <if test="productName != null and productName != '' ">
+        and product_name like  concat('%',#{productName},'%')
+      </if>
     </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
