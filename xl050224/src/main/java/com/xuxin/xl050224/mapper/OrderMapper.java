@@ -2,6 +2,7 @@ package com.xuxin.xl050224.mapper;
 
 import com.xuxin.xl050224.dto.out.OrderListOutDTO;
 import com.xuxin.xl050224.entity.Order;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,5 +21,8 @@ public interface OrderMapper {
 
     int updateByPrimaryKey(Order record);
 
-    List<OrderListOutDTO> selectOrderList();
+    List<OrderListOutDTO> selectOrderList(@Param("customerName") String customerName,
+                                          @Param("orderId") Long orderId,
+                                          @Param("totalPrice") double totalPrice,
+                                          @Param("status") Byte status);
 }

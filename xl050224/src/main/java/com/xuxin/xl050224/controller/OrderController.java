@@ -28,7 +28,7 @@ public class OrderController {
     public PageInfo<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,
                                             @RequestParam(defaultValue = "1") Integer pageNum){
         PageHelper.startPage(pageNum,5);
-        List<OrderListOutDTO> orderListOutDTOS = orderService.search();
+        List<OrderListOutDTO> orderListOutDTOS = orderService.search(orderSearchInDTO);
         PageInfo<OrderListOutDTO> pageInfo = new PageInfo<>(orderListOutDTOS);
         return pageInfo;
     }

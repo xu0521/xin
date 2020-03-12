@@ -1,6 +1,7 @@
 package com.xuxin.xl050224.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.xuxin.xl050224.dto.in.OrderSearchInDTO;
 import com.xuxin.xl050224.dto.out.OrderListOutDTO;
 import com.xuxin.xl050224.dto.out.OrderShowOutDTO;
 import com.xuxin.xl050224.entity.Customer;
@@ -29,8 +30,13 @@ public class OrderServiceImpl implements OrderService {
     private CustomerService customerService;
 
     @Override
-    public List<OrderListOutDTO> search() {
-        List<OrderListOutDTO> orderListOutDTOS = orderMapper.selectOrderList();
+    public List<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO) {
+        List<OrderListOutDTO> orderListOutDTOS = orderMapper.selectOrderList(
+                orderSearchInDTO.getCustomerName(),
+                orderSearchInDTO.getOrderId(),
+                orderSearchInDTO.getTotalPrice(),
+                orderSearchInDTO.getStatus()
+        );
         return orderListOutDTOS;
     }
 

@@ -35,8 +35,23 @@
     FROM
         xl_order AS o
         LEFT JOIN xl_customer AS c ON o.customer_id = c.customer_id
-    ORDER BY
-        create_time DESC
+    <where>
+      1=1
+      <if test="orderId != null and orderId != '' ">
+        and o.order_id = #{orderId}
+      </if>
+      <if test="totalPrice != null and totalPrice != '' ">
+      and o.total_price = #{totalPrice}
+      </if>
+      <if test="status != null and status != '' ">
+        and o.status = #{status}
+      </if>
+      <if test="customerName != null and customerName != '' ">
+        and c.real_name like concat('%',#{customerName},'%')
+      </if>
+    </where>
+      ORDER BY
+      create_time DESC
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from xl_order
