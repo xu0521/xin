@@ -18,7 +18,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<Customer> search(CustomerSearchInDTO customerSearchInDTO) {
-        List<Customer> search = customerMapper.search(customerSearchInDTO);
+        List<Customer> search = customerMapper.search(customerSearchInDTO.getUsername(),
+                customerSearchInDTO.getRealName(),
+                customerSearchInDTO.getMobile(),
+                customerSearchInDTO.getEmail(),
+                customerSearchInDTO.getStatus());
         return search;
     }
 

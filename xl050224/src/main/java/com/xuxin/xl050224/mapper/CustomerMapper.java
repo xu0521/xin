@@ -1,7 +1,7 @@
 package com.xuxin.xl050224.mapper;
 
-import com.xuxin.xl050224.dto.in.CustomerSearchInDTO;
 import com.xuxin.xl050224.entity.Customer;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,5 +20,9 @@ public interface CustomerMapper {
 
     int updateByPrimaryKey(Customer record);
 
-    List<Customer> search(CustomerSearchInDTO customerSearchInDTO);
+    List<Customer> search(@Param("username") String username,
+                          @Param("realName") String realName,
+                          @Param("mobile") String mobile,
+                          @Param("email") String email,
+                          @Param("status") Byte status);
 }
