@@ -142,6 +142,8 @@ public class AdministratorController {
         administrator.setEncryptedPassword(bcrypHashString);
         administratorService.update(administrator);
 
+        emailPwdResetCodeMap.remove(email);
+
     }
 
     //显示页面上的参数

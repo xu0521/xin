@@ -1,6 +1,5 @@
 package com.xuxin.xl050224.mapper;
 
-import com.xuxin.xl050224.dto.in.ProductSearchInDTO;
 import com.xuxin.xl050224.dto.out.ProductListOutDTO;
 import com.xuxin.xl050224.entity.Product;
 import org.apache.ibatis.annotations.Param;
@@ -24,5 +23,7 @@ public interface ProductMapper {
 
     int batchDelete(@Param("productIds") List<Integer> productIds);
 
-    List<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO);
+    List<ProductListOutDTO> search(@Param("productCode") String productCode,
+                                   @Param("status") Byte status,
+                                   @Param("stockQuantity") Integer stockQuantity);
 }

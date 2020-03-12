@@ -97,7 +97,9 @@ public class ProductServiceImpl  implements ProductService {
 
     @Override
     public List<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO) {
-        List<ProductListOutDTO> productListOutDTOS =  productMapper.search(productSearchInDTO);
+        List<ProductListOutDTO> productListOutDTOS =  productMapper.search(productSearchInDTO.getProductCode(),
+                productSearchInDTO.getStatus(),
+                productSearchInDTO.getStockQuantity());
         return productListOutDTOS;
     }
 
