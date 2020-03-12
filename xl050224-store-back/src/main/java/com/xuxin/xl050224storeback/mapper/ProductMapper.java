@@ -1,7 +1,7 @@
 package com.xuxin.xl050224storeback.mapper;
 
-import com.xuxin.xl050224storeback.dto.in.ProductSearchInDTO;
 import com.xuxin.xl050224storeback.entity.Product;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,5 +20,9 @@ public interface ProductMapper {
 
     int updateByPrimaryKey(Product record);
 
-    List<Product> selectProduct(ProductSearchInDTO productSearchInDTO);
+    List<Product> selectProduct(@Param("productName") String productName,
+                                @Param("price") double price,
+                                @Param("stockQuantity") Integer stockQuantity,
+                                @Param("status") Byte status,
+                                @Param("productCode") String productCode);
 }

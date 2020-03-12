@@ -28,22 +28,24 @@
     select
     <include refid="Base_Column_List" />
     from xl_product
-    where 1=1
-    <if test="productName != null and productName != '' ">
-        and product_name like #{productName}
+    <where>
+       1=1
+      <if test="price != null and price != '' ">
+      and price = #{price}
     </if>
-    <if test="price != null and price != '' ">
-    and price = #{price}
-  </if>
-    <if test="stockQuantity != null and stockQuantity != '' ">
-      and stock_quantity = #{stockQuantity}
-    </if>
-    <if test="status != null and status != '' ">
-      and status = #{status}
-    </if>
-    <if test="productCode != null and productCode != '' ">
-      and product_code like #{productCode}
-    </if>
+      <if test="stockQuantity != null and stockQuantity != '' ">
+        and stock_quantity &lt;= #{stockQuantity}
+      </if>
+      <if test="status != null and status != '' ">
+        and status = #{status}
+      </if>
+      <if test="productCode != null and productCode != '' ">
+        and product_code = #{productCode}
+      </if>
+      <if test="productName != null and productName != '' ">
+        and product_name like concat('%',#{productName},'%')
+      </if>
+    </where>
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from xl_product

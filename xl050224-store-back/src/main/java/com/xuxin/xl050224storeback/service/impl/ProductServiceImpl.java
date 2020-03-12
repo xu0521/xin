@@ -51,7 +51,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getList(ProductSearchInDTO productSearchInDTO) {
-        List<Product> products = productMapper.selectProduct(productSearchInDTO);
+        List<Product> products = productMapper.selectProduct(
+                productSearchInDTO.getProductName(),
+                productSearchInDTO.getPrice(),
+                productSearchInDTO.getStockQuantity(),
+                productSearchInDTO.getStatus(),
+                productSearchInDTO.getProductCode()
+        );
         return products;
     }
 

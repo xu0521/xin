@@ -162,6 +162,8 @@ public class CustomerController {
         customerService.updateProfile(customer);
 
         emailPwdResetCodeMap.remove(email);
+
+        emailPwdResetCodeMap.remove(email);
     }
 
 }
