@@ -161,11 +161,11 @@ export default {
       this.productCreate.mainPicUrl = this.minaPicUrl;
       this.productCreate.otherPicUrls = this.otherPicUrls;
       axios.post("/product/create", this.productCreate).then(res => {
-        this.$router.push("/productSearch");
+        this.$router.push("/layout/productSearch");
       });
     },
     onReturn() {
-      this.$router.push("/productSearch");
+      this.$router.push("/layout/productSearch");
     },
     onClick(e) {
       //this.$emit("onClick", e, tinymce);

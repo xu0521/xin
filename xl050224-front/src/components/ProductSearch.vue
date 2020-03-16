@@ -61,10 +61,10 @@ export default {
       this.getProduct(pageNum);
     },
     create() {
-      this.$router.push("/productCreate");
+      this.$router.push("/layout/productCreate");
     },
     handleClick(row){
-      this.$router.push({name:"ProductUpdate" , query:row})
+      this.$router.push({path:"/layout/productUpdate" , query:{productId:row.productId}})
     }
   },
   mounted() {

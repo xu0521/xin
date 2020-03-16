@@ -2,10 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+
+
 import HelloWorld from '@/components/HelloWorld'
 import ProductSearch from '@/components/ProductSearch'
 import ProductCreate from '@/components/ProductCreate'
-import productUpdate from '@/components/productUpdate'
+import ProductUpdate from '@/components/productUpdate'
 import AdministratorLogin from '@/components/AdministratorLogin'
 import AdministratorUpdateProfile from '@/components/AdministratorUpdateProfile'
 import AdministratorCreate from '@/components/AdministratorCreate'
@@ -22,12 +24,20 @@ import ReturnShow from '@/components/ReturnShow'
 import ReturnHistoryIndex from '@/components/ReturnHistoryIndex'
 import AdministratorForgetPwd from '@/components/AdministratorForgetPwd'
 import AdministratorResetPwd from '@/components/AdministratorResetPwd'
+import Layout from '@/components/Layout'
+import Login from '@/components/Login'
+
 
 Vue.use(Router)
 Vue.use(ElementUI);
 
+Vue.component("productSearch",ProductSearch)
+
 export default new Router({
-  mode:"history",
+  mode: "history",
+  scrollBehavior: () => ({
+     y: 0
+     }),
   routes: [
     {
       path: '/',
@@ -47,7 +57,7 @@ export default new Router({
     {
       path: '/productUpdate',
       name: 'ProductUpdate',
-      component: productUpdate
+      component: ProductUpdate
     },
     {
       path: '/administratorLogin',
@@ -128,6 +138,31 @@ export default new Router({
       path: '/administratorResetPwd',
       name: 'AdministratorResetPwd',
       component: AdministratorResetPwd
-    }
+    },
+    {
+      path: '/layout',
+      name: 'Layout',
+      component: Layout,
+      hidden: true,
+      children: [ 
+        { path: '/layout/productSearch', name: '产品页面列表', component: ProductSearch, hidden: false },
+        { path: '/layout/customerSearch', name: '客户页面列表', component: CustomerSearch, hidden: false },
+        { path: '/layout/orderSearch', name: '订单页面列表', component: OrderSearch, hidden: true },
+        { path: '/layout/returnSearch', name: '退货页面列表', component: ReturnSearch, hidden: true },
+        { path: '/layout/administratorIndex', name: '用户页面列表', component: AdministratorIndex, hidden: true },
+
+        { path: '/layout/administratorUpdateProfile', name: '个人信息', component: AdministratorUpdateProfile, hidden: true },
+        
+        { path: '/layout/productCreate', name: '产品页面添加', component: ProductCreate, hidden: true },
+        { path: '/layout/productUpdate', name: '产品页面修改', component: ProductUpdate, hidden: true },
+      ]
+    },
+    {
+      path: '/Login',
+      name: 'Login',
+      component: Login
+    },
   ]
-})
+
+}
+)

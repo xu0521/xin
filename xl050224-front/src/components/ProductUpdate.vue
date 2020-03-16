@@ -167,11 +167,11 @@ export default {
       this.productUpdate.minaPicUrl = this.minaPicUrl;
       this.productUpdate.otherPicUrls = this.otherPicUrls;
       axios.post("/product/update", this.productUpdate).then(res=>{
-        this.$router.push("/productSearch");
+        this.$router.push("/layout/productSearch");
       })
     },
     onReturn(){
-     this.$router.push("/productSearch") 
+     this.$router.push("/layout/productSearch") 
     },
     getProductById(productId){
       axios.get("/product/getProduct", {params:{"productId":productId}}).then(res=>{
