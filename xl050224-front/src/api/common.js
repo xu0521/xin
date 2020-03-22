@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:8090/'
+axios.defaults.baseURL = 'http://localhost:8090'
 axios.defaults.headers.common['jcartToken'] = localStorage['jcartToken'];
 axios.interceptors.request.use(
     config => {

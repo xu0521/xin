@@ -146,15 +146,24 @@ export default new Router({
       hidden: true,
       children: [ 
         { path: '/layout/productSearch', name: '产品页面列表', component: ProductSearch, hidden: false },
+
+        { path: '/layout/productCreate', name: '产品页面添加', component: ProductCreate, hidden: true },
+        { path: '/layout/productUpdate', name: '产品页面修改', component: ProductUpdate, hidden: true },
+
         { path: '/layout/customerSearch', name: '客户页面列表', component: CustomerSearch, hidden: false },
+
+        { path: '/layout/customerShow', name: '客户页面查询', component: CustomerShow, hidden: true },
+
         { path: '/layout/orderSearch', name: '订单页面列表', component: OrderSearch, hidden: true },
         { path: '/layout/returnSearch', name: '退货页面列表', component: ReturnSearch, hidden: true },
         { path: '/layout/administratorIndex', name: '用户页面列表', component: AdministratorIndex, hidden: true },
 
         { path: '/layout/administratorUpdateProfile', name: '个人信息', component: AdministratorUpdateProfile, hidden: true },
         
-        { path: '/layout/productCreate', name: '产品页面添加', component: ProductCreate, hidden: true },
-        { path: '/layout/productUpdate', name: '产品页面修改', component: ProductUpdate, hidden: true },
+        
+
+        
+        
       ]
     },
     {

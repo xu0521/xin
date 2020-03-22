@@ -77,7 +77,7 @@ export default {
       this.getCustomerList(pageNum);
     },
     handleClick(row) {
-      this.$router.push({ name: "CustomerShow", query: row });
+      this.$router.push({ path: "/layout/customerShow", query: {customerId:row.customerId} });
     },
     handleUpdateStatus(row){
       this.getUpdateStatus(row.customerId,row.status);

@@ -18,6 +18,16 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.el-submenu__title {
+    width: 270px;
+}
+.el-header {
+  background-color: #303133;
+  color: #ffffff;
+  line-height: 60px;
+}
+.el-aside {
+  color: #333;
 }
 </style>

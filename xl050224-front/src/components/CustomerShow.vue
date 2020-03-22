@@ -32,6 +32,9 @@
       <el-form-item label="默认地址">
         <el-input v-model="customerShow.defaultAddress" readonly></el-input>
       </el-form-item>
+      <el-form-item>
+        <el-button @click="returnClick">返回</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -53,6 +56,9 @@ export default {
           this.customerShow = res.data;
           console.log(this.customerShow);
         });
+    },
+    returnClick(){
+      this.$router.push("/layout/customerSearch")
     }
   },
   mounted() {

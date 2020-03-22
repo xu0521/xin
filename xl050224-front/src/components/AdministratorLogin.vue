@@ -39,6 +39,7 @@ export default {
         localStorage['jcartToken'] = dto.token;
         localStorage['expireTimestamp'] = dto.expireTimestamp;
         alert("登录成功")
+        this.$router.push("/layout")
       })
     }
   },

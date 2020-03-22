@@ -37,7 +37,7 @@
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <el-dropdown @command="handleMyItemClick">
-            <i class="el-icon-s-tools" style="margin-right: 15px"></i>
+            <i class="el-icon-s-tools" style="margin-right: 15px" ></i>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item
                 v-for="item in my"
@@ -47,7 +47,7 @@
               >{{item.name}}</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>王小虎</span>
+          <span>{{name}}</span>
         </el-header>
 
         <el-main>
@@ -61,54 +61,39 @@
 export default {
   name: "HelloWorld",
   data() {
-    const item = {
-      date: "2016-05-02",
-      name: "王小虎",
-      address: "上海市普陀区金沙江路 1518 弄"
-    };
     return {
-      tableData: Array(20).fill(item),
+      name: "",
       collapse: false,
       subMenus: [
         {
           name: "商品管理",
           index: "1",
           icon: "el-icon-s-goods",
-          menuItems: [
-            { name: "商品列表", index: "/layout/productSearch"  }
-          ]
+          menuItems: [{ name: "商品列表", index: "/layout/productSearch" }]
         },
         {
           name: "客户管理",
           index: "2",
           icon: "el-icon-user-solid",
-          menuItems: [
-            { name: "客户列表", index: "/layout/customerSearch" }
-          ]
+          menuItems: [{ name: "客户列表", index: "/layout/customerSearch" }]
         },
         {
           name: "订单管理",
           index: "3",
           icon: "el-icon-shopping-cart-2",
-          menuItems: [
-            { name: "订单列表", index: "/layout/orderSearch"}
-          ]
+          menuItems: [{ name: "订单列表", index: "/layout/orderSearch" }]
         },
         {
           name: "退货管理",
           index: "4",
           icon: "el-icon-delete-solid",
-          menuItems: [
-            { name: "退货列表", index: "/layout/returnSearch"}
-          ]
+          menuItems: [{ name: "退货列表", index: "/layout/returnSearch" }]
         },
         {
           name: "用户管理",
           index: "5",
           icon: "el-icon-s-custom",
-          menuItems: [
-            { name: "用户列表", index: "/layout/administratorIndex" }
-          ]
+          menuItems: [{ name: "用户列表", index: "/layout/administratorIndex" }]
         }
       ],
       my: [
@@ -161,36 +146,4 @@ a {
   color: #42b983;
 }
 
-
-
-.el-header {
-  background-color: #303133;
-  color: #ffffff;
-  line-height: 60px;
-}
-
-.el-aside {
-  background-color: #303133;
-  color: #333;
-}
-ul[data-v-005bfc5a] {
-  list-style-type: none;
-  padding: 0;
-}
-.el-submenu__title {
-  font-size: 14px;
-  color: #303133;
-  padding: 0 20px;
-  cursor: pointer;
-  -webkit-transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-  transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 255px;
-}
-li[data-v-005bfc5a] {
-  display: inline-block;
-  margin: 0 10px;
-  width: 240px;
-}
 </style>
