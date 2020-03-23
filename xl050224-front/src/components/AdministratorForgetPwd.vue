@@ -1,11 +1,11 @@
 <template>
   <div class="hello">
-    <el-form ref="form" :model="administratorForgetPwd" label-width="80px">
+    <el-form ref="form" :model="administratorForgetPwd" label-width="80px" v-loading="loading">
       <el-form-item label="邮箱">
-        <el-input v-model="administratorForgetPwd.email"></el-input>
+        <el-input v-model="administratorForgetPwd.email" placeholder="请输入邮箱号"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">找回密码</el-button>
+        <el-button type="primary" @click="onSubmit(administratorForgetPwd)">找回密码</el-button>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
@@ -13,23 +13,33 @@
 </template>
 
 <script>
-import axios from '../api/common';
+import axios from "../api/common";
 export default {
   name: "HelloWorld",
   data() {
     return {
-      administratorForgetPwd: {}
+      administratorForgetPwd: {},
+      loading:false
     };
   },
-  methods:{
-    onSubmit(){
-      axios.get("/administrator/getPwdResetCode",{params:{email:this.administratorForgetPwd.email}}).then(res=>{
-        alert("验证码发送成功")
-      }).catch(error=>{
-        console.log(error)
-      })
+  methods: {
+    onSubmit() {
+      this.loading = true;
+      axios
+        .get("/administrator/getPwdResetCode", {
+          params: { email: this.administratorForgetPwd.email }
+        })
+        .then(res => {
+          this.loading = false;
+          this.administratorForgetPwd = {};
+          alert("验证码发送成功");
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
-  }
+  },
+  mounted() {}
 };
 </script>
 
