@@ -5,7 +5,8 @@
         <el-input v-model="administratorForgetPwd.email" placeholder="请输入邮箱号"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit(administratorForgetPwd)">找回密码</el-button>
+        <el-button type="primary" @click="onSubmit()" :disabled="!buttonEnabled">找回密码</el-button>
+        <span v-show="!buttonEnabled">{{counter}}秒</span>
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
@@ -19,12 +20,22 @@ export default {
   data() {
     return {
       administratorForgetPwd: {},
-      loading:false
+      loading:false,
+      buttonEnabled:true,
+      counter:60
     };
   },
   methods: {
     onSubmit() {
       this.loading = true;
+      this.buttonEnabled = false;
+      this.counter = 60;
+      setInterval(res=>{
+        this.counter--;
+        if(this.counter < 0 ){
+          this.buttonEnabled = true;
+        }
+      },1000)
       axios
         .get("/administrator/getPwdResetCode", {
           params: { email: this.administratorForgetPwd.email }
