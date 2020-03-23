@@ -12,11 +12,10 @@ import com.xuxin.xl050224.entity.Administrator;
 import com.xuxin.xl050224.enumeration.AdministratorStatus;
 import com.xuxin.xl050224.exception.ClientException;
 import com.xuxin.xl050224.service.AdministratorService;
+import com.xuxin.xl050224.utils.EmailUtil;
 import com.xuxin.xl050224.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.DatatypeConverter;
@@ -39,11 +38,11 @@ public class AdministratorController {
     @Autowired
     private SecureRandom secureRandom;
 
-    @Autowired
-    private JavaMailSender mailSender;
-
     @Value("${spring.mail.username}")
     private String fromEmail;
+
+    @Autowired
+    private EmailUtil emailUtil;
 
     private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
 
@@ -100,15 +99,14 @@ public class AdministratorController {
 
     //根据邮件查找密码
     @GetMapping("/getPwdResetCode")
-    public void getPedRestCode(@RequestParam String email){
+    public void getPedRestCode(@RequestParam String email) throws ClientException {
+        Administrator administrator = administratorService.getByEmail(email);
+        if (administrator == null){
+            throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_EMAIL_NOT_EXIST_ERRMSG);
+        }
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom(fromEmail);
-        mailMessage.setTo(email);
-        mailMessage.setSubject("电商管理员验证密码");
-        mailMessage.setText(hex);
-        mailSender.send(mailMessage);
+        emailUtil.send(fromEmail,email,"电商管理员密码重置",hex);
         emailPwdResetCodeMap.put(email,hex);
     }
 

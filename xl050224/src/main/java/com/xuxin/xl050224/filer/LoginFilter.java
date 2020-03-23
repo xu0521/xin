@@ -47,6 +47,12 @@ public class LoginFilter implements Filter {
             return;
         }
 
+//        for (String excludeLoginApiUrl : excludeLoginApiUrls) {
+//            requestURI.endsWith(excludeLoginApiUrl);
+//            filterChain.doFilter(servletRequest, servletResponse);
+//            return;
+//        }
+
         String token = request.getHeader("jcartToken");
 //        if (token == null || token.isEmpty()){
 //            token = request.getParameter("jcartToken");
