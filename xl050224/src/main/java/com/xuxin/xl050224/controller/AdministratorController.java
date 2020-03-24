@@ -16,14 +16,14 @@ import com.xuxin.xl050224.utils.EmailUtil;
 import com.xuxin.xl050224.utils.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.DatatypeConverter;
 import java.security.SecureRandom;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @RestController
     @RequestMapping("/administrator")
@@ -44,7 +44,10 @@ public class AdministratorController {
     @Autowired
     private EmailUtil emailUtil;
 
-    private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
+    //private Map<String, String> emailPwdResetCodeMap = new HashMap<>();
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     //登录
     @GetMapping("/login")
@@ -107,17 +110,19 @@ public class AdministratorController {
         byte[] bytes = secureRandom.generateSeed(3);
         String hex = DatatypeConverter.printHexBinary(bytes);
         emailUtil.send(fromEmail,email,"电商管理员密码重置",hex);
-        emailPwdResetCodeMap.put(email,hex);
+        //emailPwdResetCodeMap.put(email,hex);
+        redisTemplate.opsForValue().set("EmailReset" + email, hex,5L, TimeUnit.MINUTES);
     }
 
     //重置密码
     @PostMapping("/resetPwd")
     public void resetPwd(@RequestBody AdministratorResetPedInDTO administratorResetPedInDTO) throws ClientException {
         String email = administratorResetPedInDTO.getEmail();
-        String innerResetCode = emailPwdResetCodeMap.get(email);
         if (email == null){
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRCODE, ClientExceptionConstant.ADMINISTRATOR_PWDRESET_EMAIL_NONE_ERRMSG);
         }
+        //String innerResetCode = emailPwdResetCodeMap.get(email);
+        String innerResetCode = redisTemplate.opsForValue().get("EmailReset" + email);
         if (innerResetCode == null){
             throw new ClientException(ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRCODE,ClientExceptionConstant.ADMINISTRATOR_PWDRESET_INNER_RESETCODE_NONE_ERRMSG);
         }
@@ -140,8 +145,9 @@ public class AdministratorController {
         administrator.setEncryptedPassword(bcrypHashString);
         administratorService.update(administrator);
 
-        emailPwdResetCodeMap.remove(email);
+//        emailPwdResetCodeMap.remove(email);
 
+        redisTemplate.delete("EmailReset" + email);
     }
 
     //显示页面上的参数
